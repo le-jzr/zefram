@@ -1,0 +1,570 @@
+
+type IDENTIFIER
+
+type CHAR
+
+type STRING
+
+type DECIMAL
+
+type OCTAL
+
+type HEXADECIMAL
+
+
+type Global = Method | Typedef
+
+type Type = TypeRef | RangeType | ArrayType | PointerType
+type NamedType = StructType | InterfaceType | SelectionType
+
+
+// type $name = $type ;
+type Typedef = struct {
+	name: IDENTIFIER
+	type: NamedType
+}
+
+// $name
+// $package . $name
+type TypeRef = struct {
+	package: ?IDENTIFIER
+	name: IDENTIFIER
+}
+
+// range ( $low .. $high )
+type RangeType = struct {
+	low: Expression
+	high: Expression
+}
+
+// [ ] $element_type
+// [ $length ] $element_type
+type ArrayType = struct {
+	length: ?Expression
+	element_type: Type
+}
+
+//     * $inner_type
+// own * $inner_type $owned
+//     ? $inner_type $nullable
+// own ? $inner_type $owned $nullable
+type PointerType = struct {
+	inner_type: Type
+	nullable: bool
+	owned: bool
+}
+
+// struct { $members }
+type StructType = struct {
+	members: []StructMember
+}
+
+// $type ;
+// $name : $type ;
+type StructMember = struct {
+	name: ?IDENTIFIER
+	type: Type
+}
+
+// interface { $members }
+type InterfaceType = struct {
+	members: []InterfaceMember
+}
+
+// $name $signature ;
+// $name ;
+type InterfaceMember = struct {
+	name: IDENTIFIER
+	signature: ?MethodSignature
+}
+
+// $types
+type SelectionType = struct {
+	// separator |
+	// min_length 2
+	types: []Type
+}
+
+// func $name $signature ; $contracts $body ;
+// func ( $receiver ) $name $signature ; $contracts $body ;
+type Method = struct {
+	receiver: ?Parameter
+	name: IDENTIFIER
+	signature: MethodSignature
+	contracts: []MethodContract
+	body: Block
+}
+
+type MethodContract = Requires | RequiresAll | Ensures | EnsuresAll | MayFail | RecursionBound
+
+// requires $expr ;
+type Requires = struct {
+	expr: Expression
+}
+
+// requires all $vars ( $expr ) ;
+type RequiresAll = struct {
+	// separator ,
+	// min_length 1
+	vars: []IDENTIFIER
+	
+	expr: Expression
+}
+
+// ensures $expr ;
+type Ensures = struct {
+	expr: Expression
+}
+
+// ensures all $vars ( $expr ) ;
+type EnsuresAll = struct {
+	// separator ,
+	// min_length 1
+	vars: []IDENTIFIER
+	
+	expr: Expression
+}
+
+// may_fail $fail_list ;
+type MayFail = struct {
+	// separator ,
+	// min_length 1
+	fail_list: []IDENTIFIER
+}
+
+// recursion_bound $expr ;
+type RecursionBound = struct {
+	expr: Expression
+}
+
+// ( $in_params ) ( $out_params )
+// ( $in_params )
+type MethodSignature = struct {
+	// separator ,
+	in_params: []Parameter
+	
+	// separator ,
+	out_params: []Parameter
+}
+
+// $name : $type
+type Parameter = struct {
+	name: ?IDENTIFIER
+	type: Type
+}
+
+// { $statements }
+type Block = struct {
+	// terminator ;
+	statements: []Statement
+}
+
+type Statement = Vardecl | VardeclTyped | While | Return | Break | Continue |
+	Block | If | Assignment | Increment | Decrement | Delete | Expression | Switch |
+	TypeSwitch | Assert | AssertAll | Assume | Fail | SanityCheck | FailRecover
+
+// assert $expr
+type Assert = struct {
+	expr: Expression
+}
+
+// assert all $vars ( $expr )
+type AssertAll = struct {
+	// separator ,
+	// min_length 1
+	vars: []IDENTIFIER
+	
+	expr: Expression
+}
+
+// assume $expr
+type Assume = struct {
+	expr: Expression
+}
+
+// fail $code
+// fail $code , $description
+type Fail = struct {
+	code: IDENTIFIER
+	description: ?STRING
+}
+
+// sanity_check $expr
+type SanityCheck = struct {
+	expr: Expression
+}
+
+type Recoverable = Expression | Assignment | Vardecl
+
+// $stmt !! $recover_block
+type FailRecover = struct {
+	stmt: Recoverable
+	recover_block: Block
+}
+
+// var $name
+// var $name = $initializer
+type Vardecl = struct {
+	name: IDENTIFIER
+	initializer: ?Expression
+}
+
+// var $names : $type
+type VardeclTyped = struct {
+	// separator ,
+	// min_length 1
+	names: []IDENTIFIER
+	type: Type
+}
+
+// $label : while $condition ; $contracts $body
+// $label : while $condition $body
+// while $condition ; $contracts $body
+// while $condition $body
+type While = struct {
+	label: ?IDENTIFIER
+	condition: Expression
+	// terminator ;
+	// min_length 1
+	contracts: []WhileContract
+	body: Block
+}
+
+type WhileContract = Invariant | InvariantAll | LoopBound
+
+// invariant $expr
+type Invariant = struct {
+	expr: Expression
+}
+
+// invariant all $vars ( $expr )
+type InvariantAll = struct {
+	// separator ,
+	// min_length 1
+	vars: []IDENTIFIER
+	
+	expr: Expression
+}
+
+// loop_bound $expr
+type LoopBound = struct {
+	expr: Expression
+}
+
+// return $retvals
+type Return = struct {
+	// separator ,
+	retvals: []Expression
+}
+
+// break
+// break $label
+type Break = struct {
+	label: ?IDENTIFIER
+}
+
+// continue
+// continue $label
+type Continue = struct {
+	label: ?IDENTIFIER
+}
+
+type ElseBranch = Block | If
+
+// if $condition $true_branch
+// if $condition $true_branch else $false_branch
+type If = struct {
+	condition: Expression
+	true_branch: Block
+	false_branch: ?ElseBranch
+}
+
+// switch $discriminant ; $cases $default
+// switch $discriminant ; $cases
+// switch ; $cases $default
+// switch ; $cases
+type Switch = struct {
+	discriminant: ?Expression
+	// min_length 1
+	cases: []SwitchCase
+	default: ?DefaultCase
+}
+
+// case $matches $body ;
+type SwitchCase = struct {
+	// min_length 1
+	// separator ,
+	matches: []Expression
+	body: Block
+}
+
+// type switch $discriminant ; $cases $default
+// type switch $discriminant ; $cases
+type TypeSwitch = struct {
+	discriminant: Expression
+	// min_length 1
+	cases: []TypeSwitchCase
+	default: ?DefaultCase
+}
+
+// case $types $body ;
+type TypeSwitchCase = struct {
+	// min_length 1
+	// separator ,
+	types: []Type
+	body: Block
+}
+
+// default $body ;
+type DefaultCase = struct {
+	body: Block
+}
+
+// $lvalues = $rvalues
+type Assignment = struct {
+	// separator ,
+	// min_length 1
+	rvalues: []Expression
+
+	// separator ,
+	// min_length 1
+	lvalues: []Expression
+}
+
+// $lvalue ++
+type Increment = struct {
+	lvalue: Expression
+}
+
+// $lvalue --
+type Decrement = struct {
+	lvalue: Expression
+}
+
+// delete $arg
+type Delete = struct {
+	arg: Expression
+}
+
+
+type Expression = Level6Expression
+type Level6Expression = Or | Level5Expression
+type Level5Expression = And | Level4Expression
+type Level4Expression = Less | LessEq | Greater | GreaterEq | Equal | Inequal | Is | Level3Expression
+type Level3Expression = BinaryPlus | BinaryMinus | BitOr | BitXor | Level2Expression
+type Level2Expression = Mult | Div | Mod | LShift | RShift | BitAnd | Level1Expression
+type Level1Expression = UnaryPlus | UnaryMinus | Deref | Ref | Not | Take | Level0Expression
+type Level0Expression = MethodCall | Selector | Indexed | Identifier | Literal | New | NewArray | PExpression
+
+// $left || $right
+type Or = struct {
+	left: Level6Expression
+	right: Level5Expression
+}
+
+// $left && $right
+type And = struct {
+	left: Level5Expression
+	right: Level4Expression
+}
+
+// $left < $right
+type Less = struct {
+	left: Level3Expression
+	right: Level3Expression
+}
+
+// $left <= $right
+type LessEq = struct {
+	left: Level3Expression
+	right: Level3Expression
+}
+
+// $left > $right
+type Greater = struct {
+	left: Level3Expression
+	right: Level3Expression
+}
+
+// $left >= $right
+type GreaterEq = struct {
+	left: Level3Expression
+	right: Level3Expression
+}
+
+// $left == $right
+type Equal = struct {
+	left: Level3Expression
+	right: Level3Expression
+}
+
+// $left != $right
+type Inequal = struct {
+	left: Level3Expression
+	right: Level3Expression
+}
+
+// $arg is $type
+type Is = struct {
+	arg: Level3Expression
+	type: Type
+}
+
+// $left + $right
+type BinaryPlus = struct {
+	left: Level3Expression
+	right: Level2Expression
+}
+
+// $left - $right
+type BinaryMinus = struct {
+	left: Level3Expression
+	right: Level2Expression
+}
+
+// $left | $right
+type BitOr = struct {
+	left: Level3Expression
+	right: Level2Expression
+}
+
+// $left ^ $right
+type BitXor = struct {
+	left: Level3Expression
+	right: Level2Expression
+}
+
+// $left * $right
+type Mult = struct {
+	left: Level2Expression
+	right: Level1Expression
+}
+
+// $left / $right
+type Div = struct {
+	left: Level2Expression
+	right: Level1Expression
+}
+
+// $left % $right
+type Mod = struct {
+	left: Level2Expression
+	right: Level1Expression
+}
+
+// $left << $right
+type LShift = struct {
+	left: Level2Expression
+	right: Level1Expression
+}
+
+// $left >> $right
+type RShift = struct {
+	left: Level2Expression
+	right: Level1Expression
+}
+
+// $left & $right
+type BitAnd = struct {
+	left: Level2Expression
+	right: Level1Expression
+}
+
+// + $arg
+type UnaryPlus = struct {
+	arg: Level1Expression
+}
+
+// - $arg
+type UnaryMinus = struct {
+	arg: Level1Expression
+}
+
+// * $arg
+type Deref = struct {
+	arg: Level1Expression
+}
+
+// & $arg
+type Ref = struct {
+	arg: Level1Expression
+}
+
+// ! $arg
+type Not = struct {
+	arg: Level1Expression
+}
+
+// @ $arg
+type Take = struct {
+	arg: Level1Expression
+}
+
+// $receiver . $method ( $args )
+// $method ( $args )
+type MethodCall = struct {
+	receiver: ?Level0Expression
+	method: IDENTIFIER
+	// separator ,
+	args: []Expression
+}
+
+// $base . $selector
+type Selector = struct {
+	base: Level0Expression
+	selector: IDENTIFIER
+}
+
+// $base [ $index ]
+type Indexed = struct {
+	base: Level0Expression
+	index: Expression
+}
+
+// $ident
+type Identifier = struct {
+	ident: IDENTIFIER
+}
+
+type Literal = Decimal | Octal | HexaDecimal | String | Char
+
+// $str
+type Decimal = struct {
+	str: DECIMAL
+}
+
+// $str
+type Octal = struct {
+	str: OCTAL
+}
+
+// $str
+type HexaDecimal = struct {
+	str: HEXADECIMAL
+}
+
+// $str
+type String = struct {
+	str: STRING
+}
+
+// $str
+type Char = struct {
+	str: CHAR
+}
+
+// new ( $type )
+type New = struct {
+	type: Type
+}
+
+// new [ $length ] ( $type )
+type NewArray = struct {
+	length: Expression
+	type: Type
+}
+
+// ( $expr )
+type PExpression = struct {
+	expr: Expression
+}

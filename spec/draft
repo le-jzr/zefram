@@ -1,0 +1,38 @@
+
+switch (var) is {
+case Type1:
+case Type2:
+case Type3:
+}
+
+
+
+Requirements:
+ - strong static typing, compiled to native code
+ - ability to statically prove absence of invalid dereferences,
+   integer overflows, out of bounds array accesses... any condition that would cause
+   the program to misbehave
+ - similar to C (superficially, and in simplicity)
+ - minimal requirements for runtime support
+   - programs without dynamic memory must be possible
+ - ability to call functions written in assembly/C
+ - ability to write assembly inline and do check it (i.e. not just "put this string in the generated code")
+
+Extending from above (mostly my preferences):
+ - arbitrary ranges instead of fixed machine types; the compiler will check that the range can't overflow (as in Ada)
+ - owned, borrowed and managed pointers (as in Rust)
+ - statement-based syntax, packages (as in Go)
+ - parser plugins for machine code
+ - contracts (preconditions, postconditions, invariants)
+   - statically verified (on a function level - a method call is specified by its interface, no inlining)
+   - integration with exchangable SMT solver (SMT-LIB 2.0 provides suitable interface)
+   - (for an example see Dafny)
+ - no classes, statically bound methods, type-tagged interface pointers to provide dynamic binding (as in Go)
+ - dynamic stack size, unless the maximum can be determined statically (also Go)
+ - compiled (at least) to ANSI C
+
+
+http://talks.golang.org/2014/research.slide
+http://research.microsoft.com/pubs/177118/tr.pdf
+http://derkthedaring.com/closures-in-go
+https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub
