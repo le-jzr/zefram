@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	pathpkg "path"
 	"strings"
+	"log"
 )
 
 type Application struct {
@@ -90,8 +91,10 @@ func (app *Application) LoadPackage(name string, path string) {
 		cmd := exec.Command(parser)
 		cmd.Stdin, err = os.Open(filename)
 		if err != nil {
-			panic(err)
+			log.Fatalf("Cannot open file %s: %s", filename, err)
 		}
+		
+		// TODO: Get rid of panics.
 
 		stdout, err := cmd.StdoutPipe()
 		if err != nil {
@@ -113,7 +116,7 @@ func (app *Application) LoadPackage(name string, path string) {
 
 		err = cmd.Wait()
 		if err != nil {
-			panic(err)
+			log.Fatalf("Parser failed of file %s: %s", filename, err)
 		}
 
 		pkg.LoadFile(app, globals)
