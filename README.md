@@ -8,4 +8,4 @@ Just a quick start for me so that I don't forget:
 	cd ../interpreter
 	make
 	cd ..
-	sh zsinterp.sh --builtinenv env --package tests/functions --run main.main
+	sh zsinterp.sh --builtinenv env --package main tests/functions --run main.main
