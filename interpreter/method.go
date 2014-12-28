@@ -78,7 +78,7 @@ func (m *Method) AllocSlot() int {
 func (m *Method) DeclareLocal(name string, t Type) {
 	_, ok := m.locals[name]
 	if ok {
-		panic("Local " + name + "already exists.")
+		panic("Local " + name + " already exists.")
 	}
 	m.locals[name] = m.AllocSlot()
 	m.localTypes[name] = t

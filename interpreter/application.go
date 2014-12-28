@@ -89,6 +89,7 @@ func (app *Application) LoadPackage(name string, path string) {
 		}
 
 		cmd := exec.Command(parser)
+		cmd.Stderr = os.Stderr
 		cmd.Stdin, err = os.Open(filename)
 		if err != nil {
 			log.Fatalf("Cannot open file %s: %s", filename, err)
@@ -110,9 +111,10 @@ func (app *Application) LoadPackage(name string, path string) {
 
 		file := ParseASTFile(p)
 
+		// FIXME: When the parser fails, this is never reached.
 		err = cmd.Wait()
 		if err != nil {
-			log.Fatalf("Parser failed of file %s: %s", filename, err)
+			log.Fatalf("Parser failed on file %s: %s", filename, err)
 		}
 
 		pkg.LoadFile(app, file._globals)
