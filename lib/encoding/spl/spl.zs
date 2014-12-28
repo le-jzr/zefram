@@ -1,20 +1,19 @@
 
-
 type Reader = interface {
-	[[may_fail]]
-	[[ensures (result <= len(buffer))]]
+	//[[may_fail]]
+	//[[ensures (result <= len(buffer))]]
 	read(buffer: *[]byte) (result: int64)
 }
 
-type SPLParser = struct {
+type SeqParser = struct {
 	_line:    int
 	_column:  int
 	_end:     bool
 	_current: [1]byte
 }
 
-[[may_fail]]
-func (p: *SPLParser) shift(r: *Reader, count: int)
+//[[may_fail]]
+func (p: *SeqParser) shift(r: *Reader, count: int)
 {
 	var i = 0
 	
@@ -38,50 +37,64 @@ func (p: *SPLParser) shift(r: *Reader, count: int)
 	}
 }
 
-func (p: *SPLParser) is_eof() bool {
+
+
+func (p: *SeqParser) is_eof(r: *Reader) (result: bool)
+{
 	return p._end
 }
 
-func (p: *SPLParser) current() byte {
+func (p: *SeqParser) current(r: *Reader) (result: byte)
+{
 	if p._end {
 		return 0
 	}
 	return p._current[0]
 }
 
-func (p: *SPLParser) skip_space() {
+func (p: *SeqParser) skip_space(r: *Reader)
+{
 	while p.current() == ' ' || p.current() == '\t' || p.current() == '\r' || p.current() == '\n' {
 		p.shift(1)
 	}
 }
 
-func (p: *SPLParser) line() int {
+
+func (p: *SeqParser) line() (result: int)
+{
 	return p._line
 }
 
-func (p: *SPLParser) column() int {
+func (p: *SeqParser) column() (result: int)
+{
 	return p._column
 }
 
-func (p: *SPLParser) is_list() bool {
+func (p: *SeqParser) is_list() (result: bool)
+{
 	return p.current() == '('
 }
 
-func (p: *SPLParser) is_string() bool {
+
+func (p: *SeqParser) is_string() (result: bool)
+{
 	return p.current() == '"'
 }
 
-func (p: *SPLParser) is_end() bool {
+func (p: *SeqParser) is_end() (result: bool)
+{
 	return p.is_eof() || p.current() == ')'
 }
 
-func (p: *SPLParser) down() {
+func (p: *SeqParser) down()
+{
 	p.shift(1)
 	p.skip_space()
 }
 
-func (p: *SPLParser) up() {
-	for !p.is_end() {
+func (p: *SeqParser) up()
+{
+	while !p.is_end() {
 		p.skip()
 	}
 
@@ -89,7 +102,8 @@ func (p: *SPLParser) up() {
 	p.skip_space()
 }
 
-func (p: *SPLParser) skip() {
+func (p: *SeqParser) skip()
+{
 	if p.is_list() {
 		p.down()
 		p.up()
@@ -102,10 +116,11 @@ func (p: *SPLParser) skip() {
 	}
 }
 
-func (p: *SPLParser) skip_string() {
+func (p: *SeqParser) skip_string()
+{
 	p.shift(1)
 
-	for {
+	while true {
 		if p.is_eof() {
 			fail BAD_INPUT, "End of file within a string."
 		}
@@ -129,7 +144,7 @@ func (p: *SPLParser) skip_string() {
 			}
 			case 'u' {
 				p.shift(5)
-			}s
+			}
 			case 'U' {
 				p.shift(9)
 			};;
@@ -159,7 +174,8 @@ func unhex(h: *[]byte) (result: int)
 	return result
 }
 
-func (p: *SPLParser) string() (ret: string) {
+func (p: *SeqParser) string() (ret: string)
+{
 	if p.current() != '"' {
 		fail BAD_INPUT, "Not a string"
 	}
@@ -167,31 +183,34 @@ func (p: *SPLParser) string() (ret: string) {
 
 	var buf = new(Buffer)
 
-	for {
+	while true {
 		if p.is_eof() {
-			panic("End of file within a string.")
+			fail BAD_INPUT, "End of file within a string."
 		}
 
 		var c = p.current()
 		p.shift(1)
 
-		switch c {
-		case '"':
+		switch c
+		case '"' {
 			p.skip_space()
 			return buf.string()
-
-		case '\\':
-			switch p.current() {
-			case '"', '\\':
+		}
+		case '\\' {
+			switch p.current()
+			case '"', '\\' {
 				buf.append(p.current())
 				p.shift(1)
-			case 'n':
+			}
+			case 'n' {
 				buf.append('\n')
 				p.shift(1)
-			case 'r':
+			}
+			case 'r' {
 				buf.append('\r')
 				p.shift(1)
-			case 'x':
+			}
+			case 'x' {
 				var h: [2]byte
 				p.shift(1)
 				h[0] = p.current()
@@ -199,14 +218,17 @@ func (p: *SPLParser) string() (ret: string) {
 				h[1] = p.current()
 				p.shift(1)
 				buf.append(unhex(&h))
-			case 'u':
+			}
+			case 'u' {
 				// TODO
 				fail NOT_IMPLEMENTED
-			case 'U':
-				fail NOT_IMPLEMENTED
 			}
-		default:
-			buf.append(c)
+			case 'U' {
+				fail NOT_IMPLEMENTED
+			};;
 		}
+		default {
+			buf.append(c)
+		};;
 	}
 }
