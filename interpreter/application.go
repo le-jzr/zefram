@@ -108,18 +108,14 @@ func (app *Application) LoadPackage(name string, path string) {
 
 		p := spl.NewSeqParser(stdout)
 
-		globals := make([]ASTGlobal, 0)
-
-		for !p.IsEnd() {
-			globals = append(globals, ParseASTGlobal(p))
-		}
+		file := ParseASTFile(p)
 
 		err = cmd.Wait()
 		if err != nil {
 			log.Fatalf("Parser failed of file %s: %s", filename, err)
 		}
 
-		pkg.LoadFile(app, globals)
+		pkg.LoadFile(app, file._globals)
 	}
 
 	for _, t := range pkg.Types {

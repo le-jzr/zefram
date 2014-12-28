@@ -11,6 +11,10 @@ type OCTAL
 
 type HEXADECIMAL
 
+// $globals
+type File = struct {
+	globals: []Global
+}
 
 type Global = Method | Typedef
 
