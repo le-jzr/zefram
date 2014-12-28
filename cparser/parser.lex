@@ -1,4 +1,7 @@
 %option noyywrap
+%option reentrant
+%option bison-locations
+%option bison-bridge
 
 %{
 	#include <stdbool.h>
@@ -62,16 +65,16 @@ all                     semi = true; return SYM_ALL;
 
 "\.\."                  semi = false; return SYM_DOTDOT;
 
-[a-zA-Z_][a-zA-Z0-9_]*  yylval = SExString(yytext); semi = true; return IDENTIFIER;
+[a-zA-Z_][a-zA-Z0-9_]*  *yylval = SExString(yytext); semi = true; return IDENTIFIER;
 
-[1-9][0-9]*             yylval = SExString(yytext); semi = true; return DECIMAL;
-0[0-7]*                 yylval = SExString(yytext); semi = true; return OCTAL;
-0[xX][0-9a-fA-F]+       yylval = SExString(yytext); semi = true; return HEXADECIMAL;
+[1-9][0-9]*             *yylval = SExString(yytext); semi = true; return DECIMAL;
+0[0-7]*                 *yylval = SExString(yytext); semi = true; return OCTAL;
+0[xX][0-9a-fA-F]+       *yylval = SExString(yytext); semi = true; return HEXADECIMAL;
 [0-9][0-9a-zA-Z]+       fprintf(stderr, "Invalid numeric constant\n"); exit(1);
 
-\"\"                    yylval = SExString(""); semi = true; return STRING;
-\"([^\"\\]|(\\.))*\"    yylval = SExString(UnescapeString(yytext)); semi = true; return STRING;
-\'([^\'\\]|(\\.))*\'    yylval = SExString(UnescapeString(yytext)); semi = true; return CHAR;
+\"\"                    *yylval = SExString(""); semi = true; return STRING;
+\"([^\"\\]|(\\.))*\"    *yylval = SExString(UnescapeString(yytext)); semi = true; return STRING;
+\'([^\'\\]|(\\.))*\'    *yylval = SExString(UnescapeString(yytext)); semi = true; return CHAR;
 
 "//"[^\n]*              /* Ignore comment. */
 

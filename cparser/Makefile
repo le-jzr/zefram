@@ -11,10 +11,10 @@ parser.y: tools/astgen-yacc4spl ../spec/ast.def
 	tools/astgen-yacc4spl ../spec/ast.def > parser.y
 
 parser.tab.c parser.tab.h: parser.y
-	bison -t -d --report=all parser.y
+	bison -fcaret -fdiagnostics-show-caret --locations -t -d --report=all parser.y
 
 lex.yy.c: parser.lex parser.tab.h
-	flex parser.lex
+	flex --yylineno --bison-bridge --bison-locations parser.lex
 
 clean:
 	rm -rf parser.tab.o lex.yy.o parser.tab.c parser.tab.h parser.output lex.yy.c parser.y zsparser tools
