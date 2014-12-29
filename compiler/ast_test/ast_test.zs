@@ -4,38 +4,41 @@ type BufferReader = struct {
 	pos: int64
 }
 
-func (r: *BufferReader) read(b: *[]byte) int64 {
-	var remaining = len(buffer) - pos
+func (r: *BufferReader) read(b: *[]byte) (bytes: int64)
+{
+
+	var remaining = len(r.buffer) - r.pos
+	
+	var i = 0
 	if len(b) < remaining {
-		int i = 0
 		while i < len(b) {
-			b[i] = r.buffer[pos + i]
+			b[i] = r.buffer[r.pos + i]
 			i++
 		}
-		pos += len(b)
+		r.pos = r.pos + len(b)
 		return len(b)
 	} else {
-		int i = 0
 		while i < remaining {
-			b[i] = r.buffer[pos + i]
+			b[i] = r.buffer[r.pos + i]
 			i++
 		}
-		pos += remaining
+		r.pos = r.pos + remaining
 		return remaining
 	}
 }
 
 func main()
 {
-	var r BufferReader
-	r.buffer = env.read_file("test.ast")
+	var r: BufferReader
+	r.buffer = env.read_file("tests/functions/functions.ast")
 	r.pos = 0
 	
-	var p = spl.new_SeqParser()
-	while !p.is_eof(r) {
-		var g = parse_ASTGlobal(p, r)
-		g.print()
-		delete @g
-	}
+	var p = new(spl.SeqParser)
+	p.shift(&r, 1)
+	
+	var f = ast.parse_ASTFile(p, &r)
+	f.print()
+	env.print("\n")
+	delete @f
 	delete @p
 }

@@ -4,14 +4,22 @@ func (n: *ASTAnd) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -24,14 +32,22 @@ func (n: *ASTArrayType) print()
 	
 	env.print("length = ")
 	
-	n._length.print()
+	if n._length == null {
+		env.print("null")
+	} else {
+		n._length.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("element_type = ")
 	
-	n._element_type.print()
+	if n._element_type == null {
+		env.print("null")
+	} else {
+		n._element_type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -44,7 +60,11 @@ func (n: *ASTAssert) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -64,7 +84,11 @@ func (n: *ASTAssertAll) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -106,7 +130,11 @@ func  (n: *ASTAssignment) print_rvalues()
 	var i = 0
 	
 	while i < len(n._rvalues) {
-		n._rvalues[i].print()
+		if n._rvalues[i] == null {
+			env.print("null")
+		} else {
+			n._rvalues[i].print()
+		}
 		
 		i++
 	}
@@ -116,7 +144,11 @@ func  (n: *ASTAssignment) print_lvalues()
 	var i = 0
 	
 	while i < len(n._lvalues) {
-		n._lvalues[i].print()
+		if n._lvalues[i] == null {
+			env.print("null")
+		} else {
+			n._lvalues[i].print()
+		}
 		
 		i++
 	}
@@ -127,7 +159,11 @@ func (n: *ASTAssume) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -140,14 +176,22 @@ func (n: *ASTBinaryMinus) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -160,14 +204,22 @@ func (n: *ASTBinaryPlus) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -180,14 +232,22 @@ func (n: *ASTBitAnd) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -200,14 +260,22 @@ func (n: *ASTBitOr) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -220,14 +288,22 @@ func (n: *ASTBitXor) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -252,7 +328,11 @@ func  (n: *ASTBlock) print_statements()
 	var i = 0
 	
 	while i < len(n._statements) {
-		n._statements[i].print()
+		if n._statements[i] == null {
+			env.print("null")
+		} else {
+			n._statements[i].print()
+		}
 		
 		i++
 	}
@@ -323,7 +403,11 @@ func (n: *ASTDecrement) print()
 	
 	env.print("lvalue = ")
 	
-	n._lvalue.print()
+	if n._lvalue == null {
+		env.print("null")
+	} else {
+		n._lvalue.print()
+	}
 	
 	env.print(",\n")
 	
@@ -336,7 +420,11 @@ func (n: *ASTDefaultCase) print()
 	
 	env.print("body = ")
 	
-	n._body.print()
+	if n._body == null {
+		env.print("null")
+	} else {
+		n._body.print()
+	}
 	
 	env.print(",\n")
 	
@@ -349,7 +437,11 @@ func (n: *ASTDelete) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -362,7 +454,11 @@ func (n: *ASTDeref) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -375,14 +471,22 @@ func (n: *ASTDiv) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -395,7 +499,11 @@ func (n: *ASTEnsures) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -415,7 +523,11 @@ func (n: *ASTEnsuresAll) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -438,14 +550,22 @@ func (n: *ASTEqual) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -482,14 +602,22 @@ func (n: *ASTFailRecover) print()
 	
 	env.print("stmt = ")
 	
-	n._stmt.print()
+	if n._stmt == null {
+		env.print("null")
+	} else {
+		n._stmt.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("recover_block = ")
 	
-	n._recover_block.print()
+	if n._recover_block == null {
+		env.print("null")
+	} else {
+		n._recover_block.print()
+	}
 	
 	env.print(",\n")
 	
@@ -514,7 +642,11 @@ func  (n: *ASTFile) print_globals()
 	var i = 0
 	
 	while i < len(n._globals) {
-		n._globals[i].print()
+		if n._globals[i] == null {
+			env.print("null")
+		} else {
+			n._globals[i].print()
+		}
 		
 		i++
 	}
@@ -525,14 +657,22 @@ func (n: *ASTGreater) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -545,14 +685,22 @@ func (n: *ASTGreaterEq) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -591,21 +739,33 @@ func (n: *ASTIf) print()
 	
 	env.print("condition = ")
 	
-	n._condition.print()
+	if n._condition == null {
+		env.print("null")
+	} else {
+		n._condition.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("true_branch = ")
 	
-	n._true_branch.print()
+	if n._true_branch == null {
+		env.print("null")
+	} else {
+		n._true_branch.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("false_branch = ")
 	
-	n._false_branch.print()
+	if n._false_branch == null {
+		env.print("null")
+	} else {
+		n._false_branch.print()
+	}
 	
 	env.print(",\n")
 	
@@ -618,7 +778,11 @@ func (n: *ASTIncrement) print()
 	
 	env.print("lvalue = ")
 	
-	n._lvalue.print()
+	if n._lvalue == null {
+		env.print("null")
+	} else {
+		n._lvalue.print()
+	}
 	
 	env.print(",\n")
 	
@@ -631,14 +795,22 @@ func (n: *ASTIndexed) print()
 	
 	env.print("base = ")
 	
-	n._base.print()
+	if n._base == null {
+		env.print("null")
+	} else {
+		n._base.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("index = ")
 	
-	n._index.print()
+	if n._index == null {
+		env.print("null")
+	} else {
+		n._index.print()
+	}
 	
 	env.print(",\n")
 	
@@ -651,14 +823,22 @@ func (n: *ASTInequal) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -678,7 +858,11 @@ func (n: *ASTInterfaceMember) print()
 	
 	env.print("signature = ")
 	
-	n._signature.print()
+	if n._signature == null {
+		env.print("null")
+	} else {
+		n._signature.print()
+	}
 	
 	env.print(",\n")
 	
@@ -703,7 +887,11 @@ func  (n: *ASTInterfaceType) print_members()
 	var i = 0
 	
 	while i < len(n._members) {
-		n._members[i].print()
+		if n._members[i] == null {
+			env.print("null")
+		} else {
+			n._members[i].print()
+		}
 		
 		i++
 	}
@@ -714,7 +902,11 @@ func (n: *ASTInvariant) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -734,7 +926,11 @@ func (n: *ASTInvariantAll) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -757,14 +953,22 @@ func (n: *ASTIs) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -777,14 +981,22 @@ func (n: *ASTLShift) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -797,14 +1009,22 @@ func (n: *ASTLess) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -817,14 +1037,22 @@ func (n: *ASTLessEq) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -837,7 +1065,11 @@ func (n: *ASTLoopBound) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -873,7 +1105,11 @@ func (n: *ASTMethod) print()
 	
 	env.print("receiver = ")
 	
-	n._receiver.print()
+	if n._receiver == null {
+		env.print("null")
+	} else {
+		n._receiver.print()
+	}
 	
 	env.print(",\n")
 	
@@ -887,7 +1123,11 @@ func (n: *ASTMethod) print()
 	
 	env.print("signature = ")
 	
-	n._signature.print()
+	if n._signature == null {
+		env.print("null")
+	} else {
+		n._signature.print()
+	}
 	
 	env.print(",\n")
 	
@@ -901,7 +1141,11 @@ func (n: *ASTMethod) print()
 	
 	env.print("body = ")
 	
-	n._body.print()
+	if n._body == null {
+		env.print("null")
+	} else {
+		n._body.print()
+	}
 	
 	env.print(",\n")
 	
@@ -913,7 +1157,11 @@ func  (n: *ASTMethod) print_contracts()
 	var i = 0
 	
 	while i < len(n._contracts) {
-		n._contracts[i].print()
+		if n._contracts[i] == null {
+			env.print("null")
+		} else {
+			n._contracts[i].print()
+		}
 		
 		i++
 	}
@@ -924,7 +1172,11 @@ func (n: *ASTMethodCall) print()
 	
 	env.print("receiver = ")
 	
-	n._receiver.print()
+	if n._receiver == null {
+		env.print("null")
+	} else {
+		n._receiver.print()
+	}
 	
 	env.print(",\n")
 	
@@ -950,7 +1202,11 @@ func  (n: *ASTMethodCall) print_args()
 	var i = 0
 	
 	while i < len(n._args) {
-		n._args[i].print()
+		if n._args[i] == null {
+			env.print("null")
+		} else {
+			n._args[i].print()
+		}
 		
 		i++
 	}
@@ -980,7 +1236,11 @@ func  (n: *ASTMethodSignature) print_in_params()
 	var i = 0
 	
 	while i < len(n._in_params) {
-		n._in_params[i].print()
+		if n._in_params[i] == null {
+			env.print("null")
+		} else {
+			n._in_params[i].print()
+		}
 		
 		i++
 	}
@@ -990,7 +1250,11 @@ func  (n: *ASTMethodSignature) print_out_params()
 	var i = 0
 	
 	while i < len(n._out_params) {
-		n._out_params[i].print()
+		if n._out_params[i] == null {
+			env.print("null")
+		} else {
+			n._out_params[i].print()
+		}
 		
 		i++
 	}
@@ -1001,14 +1265,22 @@ func (n: *ASTMod) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1021,14 +1293,22 @@ func (n: *ASTMult) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1041,7 +1321,11 @@ func (n: *ASTNew) print()
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1054,14 +1338,22 @@ func (n: *ASTNewArray) print()
 	
 	env.print("length = ")
 	
-	n._length.print()
+	if n._length == null {
+		env.print("null")
+	} else {
+		n._length.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1074,7 +1366,11 @@ func (n: *ASTNot) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1100,14 +1396,22 @@ func (n: *ASTOr) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1120,7 +1424,11 @@ func (n: *ASTPExpression) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1144,7 +1452,11 @@ func (n: *ASTParameter) print()
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1157,7 +1469,11 @@ func (n: *ASTPointerType) print()
 	
 	env.print("inner_type = ")
 	
-	n._inner_type.print()
+	if n._inner_type == null {
+		env.print("null")
+	} else {
+		n._inner_type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1192,14 +1508,22 @@ func (n: *ASTRShift) print()
 	
 	env.print("left = ")
 	
-	n._left.print()
+	if n._left == null {
+		env.print("null")
+	} else {
+		n._left.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("right = ")
 	
-	n._right.print()
+	if n._right == null {
+		env.print("null")
+	} else {
+		n._right.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1212,14 +1536,22 @@ func (n: *ASTRangeType) print()
 	
 	env.print("low = ")
 	
-	n._low.print()
+	if n._low == null {
+		env.print("null")
+	} else {
+		n._low.print()
+	}
 	
 	env.print(",\n")
 	
 	
 	env.print("high = ")
 	
-	n._high.print()
+	if n._high == null {
+		env.print("null")
+	} else {
+		n._high.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1232,7 +1564,11 @@ func (n: *ASTRecursionBound) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1245,7 +1581,11 @@ func (n: *ASTRef) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1258,7 +1598,11 @@ func (n: *ASTRequires) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1278,7 +1622,11 @@ func (n: *ASTRequiresAll) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1313,7 +1661,11 @@ func  (n: *ASTReturn) print_retvals()
 	var i = 0
 	
 	while i < len(n._retvals) {
-		n._retvals[i].print()
+		if n._retvals[i] == null {
+			env.print("null")
+		} else {
+			n._retvals[i].print()
+		}
 		
 		i++
 	}
@@ -1324,7 +1676,11 @@ func (n: *ASTSanityCheck) print()
 	
 	env.print("expr = ")
 	
-	n._expr.print()
+	if n._expr == null {
+		env.print("null")
+	} else {
+		n._expr.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1349,7 +1705,11 @@ func  (n: *ASTSelectionType) print_types()
 	var i = 0
 	
 	while i < len(n._types) {
-		n._types[i].print()
+		if n._types[i] == null {
+			env.print("null")
+		} else {
+			n._types[i].print()
+		}
 		
 		i++
 	}
@@ -1360,7 +1720,11 @@ func (n: *ASTSelector) print()
 	
 	env.print("base = ")
 	
-	n._base.print()
+	if n._base == null {
+		env.print("null")
+	} else {
+		n._base.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1404,7 +1768,11 @@ func (n: *ASTStructMember) print()
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1429,7 +1797,11 @@ func  (n: *ASTStructType) print_members()
 	var i = 0
 	
 	while i < len(n._members) {
-		n._members[i].print()
+		if n._members[i] == null {
+			env.print("null")
+		} else {
+			n._members[i].print()
+		}
 		
 		i++
 	}
@@ -1440,7 +1812,11 @@ func (n: *ASTSwitch) print()
 	
 	env.print("discriminant = ")
 	
-	n._discriminant.print()
+	if n._discriminant == null {
+		env.print("null")
+	} else {
+		n._discriminant.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1454,7 +1830,11 @@ func (n: *ASTSwitch) print()
 	
 	env.print("default = ")
 	
-	n._default.print()
+	if n._default == null {
+		env.print("null")
+	} else {
+		n._default.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1466,7 +1846,11 @@ func  (n: *ASTSwitch) print_cases()
 	var i = 0
 	
 	while i < len(n._cases) {
-		n._cases[i].print()
+		if n._cases[i] == null {
+			env.print("null")
+		} else {
+			n._cases[i].print()
+		}
 		
 		i++
 	}
@@ -1484,7 +1868,11 @@ func (n: *ASTSwitchCase) print()
 	
 	env.print("body = ")
 	
-	n._body.print()
+	if n._body == null {
+		env.print("null")
+	} else {
+		n._body.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1496,7 +1884,11 @@ func  (n: *ASTSwitchCase) print_matches()
 	var i = 0
 	
 	while i < len(n._matches) {
-		n._matches[i].print()
+		if n._matches[i] == null {
+			env.print("null")
+		} else {
+			n._matches[i].print()
+		}
 		
 		i++
 	}
@@ -1507,7 +1899,11 @@ func (n: *ASTTake) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1544,7 +1940,11 @@ func (n: *ASTTypeSwitch) print()
 	
 	env.print("discriminant = ")
 	
-	n._discriminant.print()
+	if n._discriminant == null {
+		env.print("null")
+	} else {
+		n._discriminant.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1558,7 +1958,11 @@ func (n: *ASTTypeSwitch) print()
 	
 	env.print("default = ")
 	
-	n._default.print()
+	if n._default == null {
+		env.print("null")
+	} else {
+		n._default.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1570,7 +1974,11 @@ func  (n: *ASTTypeSwitch) print_cases()
 	var i = 0
 	
 	while i < len(n._cases) {
-		n._cases[i].print()
+		if n._cases[i] == null {
+			env.print("null")
+		} else {
+			n._cases[i].print()
+		}
 		
 		i++
 	}
@@ -1588,7 +1996,11 @@ func (n: *ASTTypeSwitchCase) print()
 	
 	env.print("body = ")
 	
-	n._body.print()
+	if n._body == null {
+		env.print("null")
+	} else {
+		n._body.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1600,7 +2012,11 @@ func  (n: *ASTTypeSwitchCase) print_types()
 	var i = 0
 	
 	while i < len(n._types) {
-		n._types[i].print()
+		if n._types[i] == null {
+			env.print("null")
+		} else {
+			n._types[i].print()
+		}
 		
 		i++
 	}
@@ -1618,7 +2034,11 @@ func (n: *ASTTypedef) print()
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1631,7 +2051,11 @@ func (n: *ASTUnaryMinus) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1644,7 +2068,11 @@ func (n: *ASTUnaryPlus) print()
 	
 	env.print("arg = ")
 	
-	n._arg.print()
+	if n._arg == null {
+		env.print("null")
+	} else {
+		n._arg.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1664,7 +2092,11 @@ func (n: *ASTVardecl) print()
 	
 	env.print("initializer = ")
 	
-	n._initializer.print()
+	if n._initializer == null {
+		env.print("null")
+	} else {
+		n._initializer.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1684,7 +2116,11 @@ func (n: *ASTVardeclTyped) print()
 	
 	env.print("type = ")
 	
-	n._type.print()
+	if n._type == null {
+		env.print("null")
+	} else {
+		n._type.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1718,7 +2154,11 @@ func (n: *ASTWhile) print()
 	
 	env.print("condition = ")
 	
-	n._condition.print()
+	if n._condition == null {
+		env.print("null")
+	} else {
+		n._condition.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1732,7 +2172,11 @@ func (n: *ASTWhile) print()
 	
 	env.print("body = ")
 	
-	n._body.print()
+	if n._body == null {
+		env.print("null")
+	} else {
+		n._body.print()
+	}
 	
 	env.print(",\n")
 	
@@ -1744,7 +2188,11 @@ func  (n: *ASTWhile) print_contracts()
 	var i = 0
 	
 	while i < len(n._contracts) {
-		n._contracts[i].print()
+		if n._contracts[i] == null {
+			env.print("null")
+		} else {
+			n._contracts[i].print()
+		}
 		
 		i++
 	}
