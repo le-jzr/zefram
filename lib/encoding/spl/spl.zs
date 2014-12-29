@@ -54,8 +54,8 @@ func (p: *SeqParser) current(r: *Reader) (result: byte)
 
 func (p: *SeqParser) skip_space(r: *Reader)
 {
-	while p.current() == ' ' || p.current() == '\t' || p.current() == '\r' || p.current() == '\n' {
-		p.shift(1)
+	while p.current(r) == ' ' || p.current(r) == '\t' || p.current(r) == '\r' || p.current(r) == '\n' {
+		p.shift(r, 1)
 	}
 }
 
@@ -70,83 +70,83 @@ func (p: *SeqParser) column() (result: int)
 	return p._column
 }
 
-func (p: *SeqParser) is_list() (result: bool)
+func (p: *SeqParser) is_list(r: *Reader) (result: bool)
 {
-	return p.current() == '('
+	return p.current(r) == '('
 }
 
 
-func (p: *SeqParser) is_string() (result: bool)
+func (p: *SeqParser) is_string(r: *Reader) (result: bool)
 {
-	return p.current() == '"'
+	return p.current(r) == '"'
 }
 
-func (p: *SeqParser) is_end() (result: bool)
+func (p: *SeqParser) is_end(r: *Reader) (result: bool)
 {
-	return p.is_eof() || p.current() == ')'
+	return p.is_eof(r) || p.current(r) == ')'
 }
 
-func (p: *SeqParser) down()
+func (p: *SeqParser) down(r: *Reader)
 {
-	p.shift(1)
-	p.skip_space()
+	p.shift(r, 1)
+	p.skip_space(r)
 }
 
-func (p: *SeqParser) up()
+func (p: *SeqParser) up(r: *Reader)
 {
-	while !p.is_end() {
-		p.skip()
+	while !p.is_end(r) {
+		p.skip(r)
 	}
 
-	p.shift(1)
-	p.skip_space()
+	p.shift(r, 1)
+	p.skip_space(r)
 }
 
-func (p: *SeqParser) skip()
+func (p: *SeqParser) skip(r: *Reader)
 {
-	if p.is_list() {
-		p.down()
-		p.up()
-	} else if p.is_string() {
-		p.skip_string()
-	} else if p.is_end() {
+	if p.is_list(r) {
+		p.down(r)
+		p.up(r)
+	} else if p.is_string(r) {
+		p.skip_string(r)
+	} else if p.is_end(r) {
 		// Nothing.
 	} else {
 		fail BAD_INPUT, "Bad format in SPL file."
 	}
 }
 
-func (p: *SeqParser) skip_string()
+func (p: *SeqParser) skip_string(r: *Reader)
 {
-	p.shift(1)
+	p.shift(r, 1)
 
 	while true {
-		if p.is_eof() {
+		if p.is_eof(r) {
 			fail BAD_INPUT, "End of file within a string."
 		}
 
-		var c = p.current()
-		p.shift(1)
+		var c = p.current(r)
+		p.shift(r, 1)
 
 		switch c
 		case '"' {
-			p.skipSpace()
+			p.skipSpace(r)
 			return
 		}
 		case '\\' {
-			switch p.current()
+			switch p.current(r)
 			case '"', '\\', 'n', 'r' {
-				p.shift(1)
+				p.shift(r, 1)
 			}
 			case 'x' {
 				// TODO: validate escape sequences.
-				p.shift(3)
+				p.shift(r, 3)
 			}
 			case 'u' {
-				p.shift(5)
+				p.shift(r, 5)
 			}
 			case 'U' {
-				p.shift(9)
+				p.shift(r, 9)
 			};;
 		};;
 	}
@@ -174,49 +174,49 @@ func unhex(h: *[]byte) (result: int)
 	return result
 }
 
-func (p: *SeqParser) string() (ret: string)
+func (p: *SeqParser) string(r: *Reader) (ret: string)
 {
-	if p.current() != '"' {
+	if p.current(r) != '"' {
 		fail BAD_INPUT, "Not a string"
 	}
-	p.shift(1)
+	p.shift(r, 1)
 
 	var buf = new(Buffer)
 
 	while true {
-		if p.is_eof() {
+		if p.is_eof(r) {
 			fail BAD_INPUT, "End of file within a string."
 		}
 
-		var c = p.current()
-		p.shift(1)
+		var c = p.current(r)
+		p.shift(r, 1)
 
 		switch c
 		case '"' {
-			p.skip_space()
+			p.skip_space(r)
 			return buf.string()
 		}
 		case '\\' {
-			switch p.current()
+			switch p.current(r)
 			case '"', '\\' {
-				buf.append(p.current())
-				p.shift(1)
+				buf.append(p.current(r))
+				p.shift(r, 1)
 			}
 			case 'n' {
 				buf.append('\n')
-				p.shift(1)
+				p.shift(r, 1)
 			}
 			case 'r' {
 				buf.append('\r')
-				p.shift(1)
+				p.shift(r, 1)
 			}
 			case 'x' {
 				var h: [2]byte
-				p.shift(1)
-				h[0] = p.current()
-				p.shift(1)
-				h[1] = p.current()
-				p.shift(1)
+				p.shift(r, 1)
+				h[0] = p.current(r)
+				p.shift(r, 1)
+				h[1] = p.current(r)
+				p.shift(r, 1)
 				buf.append(unhex(&h))
 			}
 			case 'u' {
