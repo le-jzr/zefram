@@ -2,11 +2,11 @@ package main
 
 import (
 	"github.com/zarevucky/spl"
+	"log"
 	"os"
 	"os/exec"
 	pathpkg "path"
 	"strings"
-	"log"
 )
 
 type Application struct {
@@ -94,7 +94,7 @@ func (app *Application) LoadPackage(name string, path string) {
 		if err != nil {
 			log.Fatalf("Cannot open file %s: %s", filename, err)
 		}
-		
+
 		// TODO: Get rid of panics.
 
 		stdout, err := cmd.StdoutPipe()
@@ -115,7 +115,7 @@ func (app *Application) LoadPackage(name string, path string) {
 		if err != nil {
 			log.Fatalf("Parser failed on file %s: %s", filename, err)
 		}
-		
+
 		if err1 != nil {
 			log.Fatalf("Unmarshaller failed on file %s: %s", filename, err)
 		}
