@@ -6,5 +6,4 @@ type ASTBase = struct {
 }
 
 type ASTVisitorBase = struct {
-	self: own *VisitorInterface
 }

@@ -1,100 +1,105 @@
-func (n: *ASTAnd) print() {
-	print("And {\n")
+func (n: *ASTAnd) print()
+{
+	env.print("And {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTArrayType) print() {
-	print("ArrayType {\n")
+func (n: *ASTArrayType) print()
+{
+	env.print("ArrayType {\n")
 	
-	print("length = ")
+	env.print("length = ")
 	
 	n._length.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("element_type = ")
+	env.print("element_type = ")
 	
 	n._element_type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTAssert) print() {
-	print("Assert {\n")
+func (n: *ASTAssert) print()
+{
+	env.print("Assert {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTAssertAll) print() {
-	print("AssertAll {\n")
+func (n: *ASTAssertAll) print()
+{
+	env.print("AssertAll {\n")
 	
-	print("vars = ")
+	env.print("vars = ")
 	
-	ret._vars = n.print_vars()
+	n.print_vars()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTAssertAll) print_vars()
 {
 	var i = 0
 	
 	while i < len(n._vars) {
-		print(n._vars[i])
+		env.print(n._vars[i])
 		
 		i++
 	}
 }
-func (n: *ASTAssignment) print() {
-	print("Assignment {\n")
+func (n: *ASTAssignment) print()
+{
+	env.print("Assignment {\n")
 	
-	print("rvalues = ")
+	env.print("rvalues = ")
 	
-	ret._rvalues = n.print_rvalues()
+	n.print_rvalues()
 	
-	print(",\n")
-	
-	
-	print("lvalues = ")
-	
-	ret._lvalues = n.print_lvalues()
-	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("lvalues = ")
+	
+	n.print_lvalues()
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
 }
 func  (n: *ASTAssignment) print_rvalues()
 {
@@ -116,124 +121,131 @@ func  (n: *ASTAssignment) print_lvalues()
 		i++
 	}
 }
-func (n: *ASTAssume) print() {
-	print("Assume {\n")
+func (n: *ASTAssume) print()
+{
+	env.print("Assume {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTBinaryMinus) print() {
-	print("BinaryMinus {\n")
+func (n: *ASTBinaryMinus) print()
+{
+	env.print("BinaryMinus {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTBinaryPlus) print() {
-	print("BinaryPlus {\n")
+func (n: *ASTBinaryPlus) print()
+{
+	env.print("BinaryPlus {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTBitAnd) print() {
-	print("BitAnd {\n")
+func (n: *ASTBitAnd) print()
+{
+	env.print("BitAnd {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTBitOr) print() {
-	print("BitOr {\n")
+func (n: *ASTBitOr) print()
+{
+	env.print("BitOr {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTBitXor) print() {
-	print("BitXor {\n")
+func (n: *ASTBitXor) print()
+{
+	env.print("BitXor {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTBlock) print() {
-	print("Block {\n")
+func (n: *ASTBlock) print()
+{
+	env.print("Block {\n")
 	
-	print("statements = ")
+	env.print("statements = ")
 	
-	ret._statements = n.print_statements()
+	n.print_statements()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTBlock) print_statements()
 {
@@ -245,399 +257,446 @@ func  (n: *ASTBlock) print_statements()
 		i++
 	}
 }
-func (n: *ASTBreak) print() {
-	print("Break {\n")
+func (n: *ASTBreak) print()
+{
+	env.print("Break {\n")
 	
-	print("label = ")
-	
-	if n._label == null {
-		print("null")
-	} else {
-		print(*n._label)
-	}
-	
-	print(",\n")
-	
-	
-	print("}")
-}
-func (n: *ASTChar) print() {
-	print("Char {\n")
-	
-	print("str = ")
-	
-	print(n._str)
-	
-	print(",\n")
-	
-	
-	print("}")
-}
-func (n: *ASTContinue) print() {
-	print("Continue {\n")
-	
-	print("label = ")
+	env.print("label = ")
 	
 	if n._label == null {
-		print("null")
+		env.print("null")
 	} else {
-		print(*n._label)
+		env.print(*n._label)
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTDecimal) print() {
-	print("Decimal {\n")
+func (n: *ASTChar) print()
+{
+	env.print("Char {\n")
 	
-	print("str = ")
+	env.print("str = ")
 	
-	print(n._str)
+	env.print(n._str)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTDecrement) print() {
-	print("Decrement {\n")
+func (n: *ASTContinue) print()
+{
+	env.print("Continue {\n")
 	
-	print("lvalue = ")
+	env.print("label = ")
+	
+	if n._label == null {
+		env.print("null")
+	} else {
+		env.print(*n._label)
+	}
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
+}
+func (n: *ASTDecimal) print()
+{
+	env.print("Decimal {\n")
+	
+	env.print("str = ")
+	
+	env.print(n._str)
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
+}
+func (n: *ASTDecrement) print()
+{
+	env.print("Decrement {\n")
+	
+	env.print("lvalue = ")
 	
 	n._lvalue.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTDefaultCase) print() {
-	print("DefaultCase {\n")
+func (n: *ASTDefaultCase) print()
+{
+	env.print("DefaultCase {\n")
 	
-	print("body = ")
+	env.print("body = ")
 	
 	n._body.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTDelete) print() {
-	print("Delete {\n")
+func (n: *ASTDelete) print()
+{
+	env.print("Delete {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTDeref) print() {
-	print("Deref {\n")
+func (n: *ASTDeref) print()
+{
+	env.print("Deref {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTDiv) print() {
-	print("Div {\n")
+func (n: *ASTDiv) print()
+{
+	env.print("Div {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTEnsures) print() {
-	print("Ensures {\n")
+func (n: *ASTEnsures) print()
+{
+	env.print("Ensures {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTEnsuresAll) print() {
-	print("EnsuresAll {\n")
+func (n: *ASTEnsuresAll) print()
+{
+	env.print("EnsuresAll {\n")
 	
-	print("vars = ")
+	env.print("vars = ")
 	
-	ret._vars = n.print_vars()
+	n.print_vars()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTEnsuresAll) print_vars()
 {
 	var i = 0
 	
 	while i < len(n._vars) {
-		print(n._vars[i])
+		env.print(n._vars[i])
 		
 		i++
 	}
 }
-func (n: *ASTEqual) print() {
-	print("Equal {\n")
+func (n: *ASTEqual) print()
+{
+	env.print("Equal {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTFail) print() {
-	print("Fail {\n")
+func (n: *ASTFail) print()
+{
+	env.print("Fail {\n")
 	
-	print("code = ")
+	env.print("code = ")
 	
-	print(n._code)
+	env.print(n._code)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("description = ")
+	env.print("description = ")
 	
 	if n._description == null {
-		print("null")
+		env.print("null")
 	} else {
-		print(*n._description)
+		env.print(*n._description)
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTFailRecover) print() {
-	print("FailRecover {\n")
+func (n: *ASTFailRecover) print()
+{
+	env.print("FailRecover {\n")
 	
-	print("stmt = ")
+	env.print("stmt = ")
 	
 	n._stmt.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("recover_block = ")
+	env.print("recover_block = ")
 	
 	n._recover_block.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTGreater) print() {
-	print("Greater {\n")
+func (n: *ASTFile) print()
+{
+	env.print("File {\n")
 	
-	print("left = ")
+	env.print("globals = ")
+	
+	n.print_globals()
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
+}
+func  (n: *ASTFile) print_globals()
+{
+	var i = 0
+	
+	while i < len(n._globals) {
+		n._globals[i].print()
+		
+		i++
+	}
+}
+func (n: *ASTGreater) print()
+{
+	env.print("Greater {\n")
+	
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTGreaterEq) print() {
-	print("GreaterEq {\n")
+func (n: *ASTGreaterEq) print()
+{
+	env.print("GreaterEq {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTHexaDecimal) print() {
-	print("HexaDecimal {\n")
+func (n: *ASTHexaDecimal) print()
+{
+	env.print("HexaDecimal {\n")
 	
-	print("str = ")
+	env.print("str = ")
 	
-	print(n._str)
+	env.print(n._str)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTIdentifier) print() {
-	print("Identifier {\n")
+func (n: *ASTIdentifier) print()
+{
+	env.print("Identifier {\n")
 	
-	print("ident = ")
+	env.print("ident = ")
 	
-	print(n._ident)
+	env.print(n._ident)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTIf) print() {
-	print("If {\n")
+func (n: *ASTIf) print()
+{
+	env.print("If {\n")
 	
-	print("condition = ")
+	env.print("condition = ")
 	
 	n._condition.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("true_branch = ")
+	env.print("true_branch = ")
 	
 	n._true_branch.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("false_branch = ")
+	env.print("false_branch = ")
 	
 	n._false_branch.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTIncrement) print() {
-	print("Increment {\n")
+func (n: *ASTIncrement) print()
+{
+	env.print("Increment {\n")
 	
-	print("lvalue = ")
+	env.print("lvalue = ")
 	
 	n._lvalue.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTIndexed) print() {
-	print("Indexed {\n")
+func (n: *ASTIndexed) print()
+{
+	env.print("Indexed {\n")
 	
-	print("base = ")
+	env.print("base = ")
 	
 	n._base.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("index = ")
+	env.print("index = ")
 	
 	n._index.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTInequal) print() {
-	print("Inequal {\n")
+func (n: *ASTInequal) print()
+{
+	env.print("Inequal {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTInterfaceMember) print() {
-	print("InterfaceMember {\n")
+func (n: *ASTInterfaceMember) print()
+{
+	env.print("InterfaceMember {\n")
 	
-	print("name = ")
+	env.print("name = ")
 	
-	print(n._name)
+	env.print(n._name)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("signature = ")
+	env.print("signature = ")
 	
 	n._signature.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTInterfaceType) print() {
-	print("InterfaceType {\n")
+func (n: *ASTInterfaceType) print()
+{
+	env.print("InterfaceType {\n")
 	
-	print("members = ")
+	env.print("members = ")
 	
-	ret._members = n.print_members()
+	n.print_members()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTInterfaceType) print_members()
 {
@@ -649,196 +708,205 @@ func  (n: *ASTInterfaceType) print_members()
 		i++
 	}
 }
-func (n: *ASTInvariant) print() {
-	print("Invariant {\n")
+func (n: *ASTInvariant) print()
+{
+	env.print("Invariant {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTInvariantAll) print() {
-	print("InvariantAll {\n")
+func (n: *ASTInvariantAll) print()
+{
+	env.print("InvariantAll {\n")
 	
-	print("vars = ")
+	env.print("vars = ")
 	
-	ret._vars = n.print_vars()
+	n.print_vars()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTInvariantAll) print_vars()
 {
 	var i = 0
 	
 	while i < len(n._vars) {
-		print(n._vars[i])
+		env.print(n._vars[i])
 		
 		i++
 	}
 }
-func (n: *ASTIs) print() {
-	print("Is {\n")
+func (n: *ASTIs) print()
+{
+	env.print("Is {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("type = ")
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTLShift) print() {
-	print("LShift {\n")
+func (n: *ASTLShift) print()
+{
+	env.print("LShift {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTLess) print() {
-	print("Less {\n")
+func (n: *ASTLess) print()
+{
+	env.print("Less {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTLessEq) print() {
-	print("LessEq {\n")
+func (n: *ASTLessEq) print()
+{
+	env.print("LessEq {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTLoopBound) print() {
-	print("LoopBound {\n")
+func (n: *ASTLoopBound) print()
+{
+	env.print("LoopBound {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTMayFail) print() {
-	print("MayFail {\n")
+func (n: *ASTMayFail) print()
+{
+	env.print("MayFail {\n")
 	
-	print("fail_list = ")
+	env.print("fail_list = ")
 	
-	ret._fail_list = n.print_fail_list()
+	n.print_fail_list()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTMayFail) print_fail_list()
 {
 	var i = 0
 	
 	while i < len(n._fail_list) {
-		print(n._fail_list[i])
+		env.print(n._fail_list[i])
 		
 		i++
 	}
 }
-func (n: *ASTMethod) print() {
-	print("Method {\n")
+func (n: *ASTMethod) print()
+{
+	env.print("Method {\n")
 	
-	print("receiver = ")
+	env.print("receiver = ")
 	
 	n._receiver.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("name = ")
+	env.print("name = ")
 	
-	print(n._name)
+	env.print(n._name)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("signature = ")
+	env.print("signature = ")
 	
 	n._signature.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("contracts = ")
+	env.print("contracts = ")
 	
-	ret._contracts = n.print_contracts()
+	n.print_contracts()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("body = ")
+	env.print("body = ")
 	
 	n._body.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTMethod) print_contracts()
 {
@@ -850,31 +918,32 @@ func  (n: *ASTMethod) print_contracts()
 		i++
 	}
 }
-func (n: *ASTMethodCall) print() {
-	print("MethodCall {\n")
+func (n: *ASTMethodCall) print()
+{
+	env.print("MethodCall {\n")
 	
-	print("receiver = ")
+	env.print("receiver = ")
 	
 	n._receiver.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("method = ")
+	env.print("method = ")
 	
-	print(n._method)
+	env.print(n._method)
 	
-	print(",\n")
-	
-	
-	print("args = ")
-	
-	ret._args = n.print_args()
-	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("args = ")
+	
+	n.print_args()
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
 }
 func  (n: *ASTMethodCall) print_args()
 {
@@ -886,24 +955,25 @@ func  (n: *ASTMethodCall) print_args()
 		i++
 	}
 }
-func (n: *ASTMethodSignature) print() {
-	print("MethodSignature {\n")
+func (n: *ASTMethodSignature) print()
+{
+	env.print("MethodSignature {\n")
 	
-	print("in_params = ")
+	env.print("in_params = ")
 	
-	ret._in_params = n.print_in_params()
+	n.print_in_params()
 	
-	print(",\n")
-	
-	
-	print("out_params = ")
-	
-	ret._out_params = n.print_out_params()
-	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("out_params = ")
+	
+	n.print_out_params()
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
 }
 func  (n: *ASTMethodSignature) print_in_params()
 {
@@ -925,301 +995,318 @@ func  (n: *ASTMethodSignature) print_out_params()
 		i++
 	}
 }
-func (n: *ASTMod) print() {
-	print("Mod {\n")
+func (n: *ASTMod) print()
+{
+	env.print("Mod {\n")
 	
-	print("left = ")
-	
-	n._left.print()
-	
-	print(",\n")
-	
-	
-	print("right = ")
-	
-	n._right.print()
-	
-	print(",\n")
-	
-	
-	print("}")
-}
-func (n: *ASTMult) print() {
-	print("Mult {\n")
-	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTNew) print() {
-	print("New {\n")
+func (n: *ASTMult) print()
+{
+	env.print("Mult {\n")
 	
-	print("type = ")
+	env.print("left = ")
+	
+	n._left.print()
+	
+	env.print(",\n")
+	
+	
+	env.print("right = ")
+	
+	n._right.print()
+	
+	env.print(",\n")
+	
+	
+	env.print("}")
+}
+func (n: *ASTNew) print()
+{
+	env.print("New {\n")
+	
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTNewArray) print() {
-	print("NewArray {\n")
+func (n: *ASTNewArray) print()
+{
+	env.print("NewArray {\n")
 	
-	print("length = ")
+	env.print("length = ")
 	
 	n._length.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("type = ")
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTNot) print() {
-	print("Not {\n")
+func (n: *ASTNot) print()
+{
+	env.print("Not {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTOctal) print() {
-	print("Octal {\n")
+func (n: *ASTOctal) print()
+{
+	env.print("Octal {\n")
 	
-	print("str = ")
+	env.print("str = ")
 	
-	print(n._str)
+	env.print(n._str)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTOr) print() {
-	print("Or {\n")
+func (n: *ASTOr) print()
+{
+	env.print("Or {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTPExpression) print() {
-	print("PExpression {\n")
+func (n: *ASTPExpression) print()
+{
+	env.print("PExpression {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTParameter) print() {
-	print("Parameter {\n")
+func (n: *ASTParameter) print()
+{
+	env.print("Parameter {\n")
 	
-	print("name = ")
+	env.print("name = ")
 	
 	if n._name == null {
-		print("null")
+		env.print("null")
 	} else {
-		print(*n._name)
+		env.print(*n._name)
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("type = ")
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTPointerType) print() {
-	print("PointerType {\n")
+func (n: *ASTPointerType) print()
+{
+	env.print("PointerType {\n")
 	
-	print("inner_type = ")
+	env.print("inner_type = ")
 	
 	n._inner_type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("nullable = ")
+	env.print("nullable = ")
 	
 	if n._nullable {
-		print("true")
+		env.print("true")
 	} else {
-		print("false")
+		env.print("false")
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("owned = ")
+	env.print("owned = ")
 	
 	if n._owned {
-		print("true")
+		env.print("true")
 	} else {
-		print("false")
+		env.print("false")
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTRShift) print() {
-	print("RShift {\n")
+func (n: *ASTRShift) print()
+{
+	env.print("RShift {\n")
 	
-	print("left = ")
+	env.print("left = ")
 	
 	n._left.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("right = ")
+	env.print("right = ")
 	
 	n._right.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTRangeType) print() {
-	print("RangeType {\n")
+func (n: *ASTRangeType) print()
+{
+	env.print("RangeType {\n")
 	
-	print("low = ")
+	env.print("low = ")
 	
 	n._low.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("high = ")
+	env.print("high = ")
 	
 	n._high.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTRecursionBound) print() {
-	print("RecursionBound {\n")
+func (n: *ASTRecursionBound) print()
+{
+	env.print("RecursionBound {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTRef) print() {
-	print("Ref {\n")
+func (n: *ASTRef) print()
+{
+	env.print("Ref {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTRequires) print() {
-	print("Requires {\n")
+func (n: *ASTRequires) print()
+{
+	env.print("Requires {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTRequiresAll) print() {
-	print("RequiresAll {\n")
+func (n: *ASTRequiresAll) print()
+{
+	env.print("RequiresAll {\n")
 	
-	print("vars = ")
+	env.print("vars = ")
 	
-	ret._vars = n.print_vars()
+	n.print_vars()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTRequiresAll) print_vars()
 {
 	var i = 0
 	
 	while i < len(n._vars) {
-		print(n._vars[i])
+		env.print(n._vars[i])
 		
 		i++
 	}
 }
-func (n: *ASTReturn) print() {
-	print("Return {\n")
+func (n: *ASTReturn) print()
+{
+	env.print("Return {\n")
 	
-	print("retvals = ")
+	env.print("retvals = ")
 	
-	ret._retvals = n.print_retvals()
+	n.print_retvals()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTReturn) print_retvals()
 {
@@ -1231,29 +1318,31 @@ func  (n: *ASTReturn) print_retvals()
 		i++
 	}
 }
-func (n: *ASTSanityCheck) print() {
-	print("SanityCheck {\n")
+func (n: *ASTSanityCheck) print()
+{
+	env.print("SanityCheck {\n")
 	
-	print("expr = ")
+	env.print("expr = ")
 	
 	n._expr.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTSelectionType) print() {
-	print("SelectionType {\n")
+func (n: *ASTSelectionType) print()
+{
+	env.print("SelectionType {\n")
 	
-	print("types = ")
+	env.print("types = ")
 	
-	ret._types = n.print_types()
+	n.print_types()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTSelectionType) print_types()
 {
@@ -1265,71 +1354,75 @@ func  (n: *ASTSelectionType) print_types()
 		i++
 	}
 }
-func (n: *ASTSelector) print() {
-	print("Selector {\n")
+func (n: *ASTSelector) print()
+{
+	env.print("Selector {\n")
 	
-	print("base = ")
+	env.print("base = ")
 	
 	n._base.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("selector = ")
+	env.print("selector = ")
 	
-	print(n._selector)
+	env.print(n._selector)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTString) print() {
-	print("String {\n")
+func (n: *ASTString) print()
+{
+	env.print("String {\n")
 	
-	print("str = ")
+	env.print("str = ")
 	
-	print(n._str)
+	env.print(n._str)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTStructMember) print() {
-	print("StructMember {\n")
+func (n: *ASTStructMember) print()
+{
+	env.print("StructMember {\n")
 	
-	print("name = ")
+	env.print("name = ")
 	
 	if n._name == null {
-		print("null")
+		env.print("null")
 	} else {
-		print(*n._name)
+		env.print(*n._name)
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("type = ")
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTStructType) print() {
-	print("StructType {\n")
+func (n: *ASTStructType) print()
+{
+	env.print("StructType {\n")
 	
-	print("members = ")
+	env.print("members = ")
 	
-	ret._members = n.print_members()
+	n.print_members()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTStructType) print_members()
 {
@@ -1341,31 +1434,32 @@ func  (n: *ASTStructType) print_members()
 		i++
 	}
 }
-func (n: *ASTSwitch) print() {
-	print("Switch {\n")
+func (n: *ASTSwitch) print()
+{
+	env.print("Switch {\n")
 	
-	print("discriminant = ")
+	env.print("discriminant = ")
 	
 	n._discriminant.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("cases = ")
+	env.print("cases = ")
 	
-	ret._cases = n.print_cases()
+	n.print_cases()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("default = ")
+	env.print("default = ")
 	
 	n._default.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTSwitch) print_cases()
 {
@@ -1377,24 +1471,25 @@ func  (n: *ASTSwitch) print_cases()
 		i++
 	}
 }
-func (n: *ASTSwitchCase) print() {
-	print("SwitchCase {\n")
+func (n: *ASTSwitchCase) print()
+{
+	env.print("SwitchCase {\n")
 	
-	print("matches = ")
+	env.print("matches = ")
 	
-	ret._matches = n.print_matches()
+	n.print_matches()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("body = ")
+	env.print("body = ")
 	
 	n._body.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTSwitchCase) print_matches()
 {
@@ -1406,66 +1501,69 @@ func  (n: *ASTSwitchCase) print_matches()
 		i++
 	}
 }
-func (n: *ASTTake) print() {
-	print("Take {\n")
+func (n: *ASTTake) print()
+{
+	env.print("Take {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTTypeRef) print() {
-	print("TypeRef {\n")
+func (n: *ASTTypeRef) print()
+{
+	env.print("TypeRef {\n")
 	
-	print("package = ")
+	env.print("package = ")
 	
 	if n._package == null {
-		print("null")
+		env.print("null")
 	} else {
-		print(*n._package)
+		env.print(*n._package)
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("name = ")
+	env.print("name = ")
 	
-	print(n._name)
+	env.print(n._name)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTTypeSwitch) print() {
-	print("TypeSwitch {\n")
+func (n: *ASTTypeSwitch) print()
+{
+	env.print("TypeSwitch {\n")
 	
-	print("discriminant = ")
+	env.print("discriminant = ")
 	
 	n._discriminant.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("cases = ")
+	env.print("cases = ")
 	
-	ret._cases = n.print_cases()
+	n.print_cases()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("default = ")
+	env.print("default = ")
 	
 	n._default.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTTypeSwitch) print_cases()
 {
@@ -1477,24 +1575,25 @@ func  (n: *ASTTypeSwitch) print_cases()
 		i++
 	}
 }
-func (n: *ASTTypeSwitchCase) print() {
-	print("TypeSwitchCase {\n")
+func (n: *ASTTypeSwitchCase) print()
+{
+	env.print("TypeSwitchCase {\n")
 	
-	print("types = ")
+	env.print("types = ")
 	
-	ret._types = n.print_types()
+	n.print_types()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("body = ")
+	env.print("body = ")
 	
 	n._body.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTTypeSwitchCase) print_types()
 {
@@ -1506,133 +1605,139 @@ func  (n: *ASTTypeSwitchCase) print_types()
 		i++
 	}
 }
-func (n: *ASTTypedef) print() {
-	print("Typedef {\n")
+func (n: *ASTTypedef) print()
+{
+	env.print("Typedef {\n")
 	
-	print("name = ")
+	env.print("name = ")
 	
-	print(n._name)
+	env.print(n._name)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("type = ")
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTUnaryMinus) print() {
-	print("UnaryMinus {\n")
+func (n: *ASTUnaryMinus) print()
+{
+	env.print("UnaryMinus {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTUnaryPlus) print() {
-	print("UnaryPlus {\n")
+func (n: *ASTUnaryPlus) print()
+{
+	env.print("UnaryPlus {\n")
 	
-	print("arg = ")
+	env.print("arg = ")
 	
 	n._arg.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTVardecl) print() {
-	print("Vardecl {\n")
+func (n: *ASTVardecl) print()
+{
+	env.print("Vardecl {\n")
 	
-	print("name = ")
+	env.print("name = ")
 	
-	print(n._name)
+	env.print(n._name)
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("initializer = ")
+	env.print("initializer = ")
 	
 	n._initializer.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
-func (n: *ASTVardeclTyped) print() {
-	print("VardeclTyped {\n")
+func (n: *ASTVardeclTyped) print()
+{
+	env.print("VardeclTyped {\n")
 	
-	print("names = ")
+	env.print("names = ")
 	
-	ret._names = n.print_names()
+	n.print_names()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("type = ")
+	env.print("type = ")
 	
 	n._type.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTVardeclTyped) print_names()
 {
 	var i = 0
 	
 	while i < len(n._names) {
-		print(n._names[i])
+		env.print(n._names[i])
 		
 		i++
 	}
 }
-func (n: *ASTWhile) print() {
-	print("While {\n")
+func (n: *ASTWhile) print()
+{
+	env.print("While {\n")
 	
-	print("label = ")
+	env.print("label = ")
 	
 	if n._label == null {
-		print("null")
+		env.print("null")
 	} else {
-		print(*n._label)
+		env.print(*n._label)
 	}
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("condition = ")
+	env.print("condition = ")
 	
 	n._condition.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("contracts = ")
+	env.print("contracts = ")
 	
-	ret._contracts = n.print_contracts()
+	n.print_contracts()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("body = ")
+	env.print("body = ")
 	
 	n._body.print()
 	
-	print(",\n")
+	env.print(",\n")
 	
 	
-	print("}")
+	env.print("}")
 }
 func  (n: *ASTWhile) print_contracts()
 {

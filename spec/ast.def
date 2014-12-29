@@ -350,9 +350,7 @@ type Delete = struct {
 	arg: Expression
 }
 
-
-type Expression = Level6Expression
-type Level6Expression = Or | Level5Expression
+type Expression = Or | Level5Expression
 type Level5Expression = And | Level4Expression
 type Level4Expression = Less | LessEq | Greater | GreaterEq | Equal | Inequal | Is | Level3Expression
 type Level3Expression = BinaryPlus | BinaryMinus | BitOr | BitXor | Level2Expression
@@ -362,7 +360,7 @@ type Level0Expression = MethodCall | Selector | Indexed | Identifier | Literal |
 
 // $left || $right
 type Or = struct {
-	left: Level6Expression
+	left: Expression
 	right: Level5Expression
 }
 

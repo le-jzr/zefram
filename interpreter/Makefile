@@ -15,7 +15,7 @@ ast_generated.go: tools/astgen-go-defs tools/astgen-go-splparser $(SPECFILE)
 	echo "// This file is generated from $(SPECFILE); DO NOT MODIFY." > $@
 	echo >> $@
 	echo "package main" >> $@
-	echo 'import "log"' >> $@
+	echo 'import "fmt"' >> $@
 	echo 'import "github.com/zarevucky/spl"' >> $@
 	echo >> $@
 	tools/astgen-go-defs $(SPECFILE) >> $@

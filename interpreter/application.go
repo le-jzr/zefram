@@ -109,12 +109,15 @@ func (app *Application) LoadPackage(name string, path string) {
 
 		p := spl.NewSeqParser(stdout)
 
-		file := ParseASTFile(p)
+		file, err1 := ParseASTFile(p)
 
-		// FIXME: When the parser fails, this is never reached.
 		err = cmd.Wait()
 		if err != nil {
 			log.Fatalf("Parser failed on file %s: %s", filename, err)
+		}
+		
+		if err1 != nil {
+			log.Fatalf("Unmarshaller failed on file %s: %s", filename, err)
 		}
 
 		pkg.LoadFile(app, file._globals)

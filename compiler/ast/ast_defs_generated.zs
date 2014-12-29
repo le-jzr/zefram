@@ -4,7 +4,7 @@ type ASTAnd = struct {
 	_left: own *ASTLevel5Expression
 	_right: own *ASTLevel4Expression
 }
-func new_ASTAnd(_left own *ASTLevel5Expression, _right own *ASTLevel4Expression) (ret: own *ASTAnd)
+func new_ASTAnd(_left: own *ASTLevel5Expression, _right: own *ASTLevel4Expression) (ret: own *ASTAnd)
 {
 	ret = new(ASTAnd)
 	ret._left = @_left
@@ -14,16 +14,16 @@ func new_ASTAnd(_left own *ASTLevel5Expression, _right own *ASTLevel4Expression)
 func (node: *ASTAnd) copy() (ret: own *ASTAnd)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTAnd)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -35,7 +35,7 @@ type ASTArrayType = struct {
 	_length: own *ASTExpression
 	_element_type: own *ASTType
 }
-func new_ASTArrayType(_length own *ASTExpression, _element_type own *ASTType) (ret: own *ASTArrayType)
+func new_ASTArrayType(_length: own *ASTExpression, _element_type: own *ASTType) (ret: own *ASTArrayType)
 {
 	ret = new(ASTArrayType)
 	ret._length = @_length
@@ -45,16 +45,16 @@ func new_ASTArrayType(_length own *ASTExpression, _element_type own *ASTType) (r
 func (node: *ASTArrayType) copy() (ret: own *ASTArrayType)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTArrayType)
 	
-	if node._length != nil {
+	if node._length != null {
 		ret._length = node._length.copy()
 	}
-	if node._element_type != nil {
+	if node._element_type != null {
 		ret._element_type = node._element_type.copy()
 	}
 	
@@ -65,7 +65,7 @@ type ASTAssert = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTAssert(_expr own *ASTExpression) (ret: own *ASTAssert)
+func new_ASTAssert(_expr: own *ASTExpression) (ret: own *ASTAssert)
 {
 	ret = new(ASTAssert)
 	ret._expr = @_expr
@@ -74,13 +74,13 @@ func new_ASTAssert(_expr own *ASTExpression) (ret: own *ASTAssert)
 func (node: *ASTAssert) copy() (ret: own *ASTAssert)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTAssert)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -92,7 +92,7 @@ type ASTAssertAll = struct {
 	_vars: own *[]string
 	_expr: own *ASTExpression
 }
-func new_ASTAssertAll(_vars own *[]string, _expr own *ASTExpression) (ret: own *ASTAssertAll)
+func new_ASTAssertAll(_vars: own *[]string, _expr: own *ASTExpression) (ret: own *ASTAssertAll)
 {
 	ret = new(ASTAssertAll)
 	ret._vars = @_vars
@@ -102,14 +102,14 @@ func new_ASTAssertAll(_vars own *[]string, _expr own *ASTExpression) (ret: own *
 func (node: *ASTAssertAll) copy() (ret: own *ASTAssertAll)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTAssertAll)
 	
 	ret._vars = node.copy_vars()
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -120,7 +120,11 @@ func (node: *ASTAssertAll) copy_vars() (ret: own *[]string)
 	
 	ret = new[len(node._vars)](string)
 	
-	copy(ret, node._vars)
+	var i = 0
+	while i < len(ret) {
+		ret[i] = node._vars[i]
+		i++
+	}
 	
 	return
 }
@@ -130,7 +134,7 @@ type ASTAssignment = struct {
 	_rvalues: own *[]own *ASTExpression
 	_lvalues: own *[]own *ASTExpression
 }
-func new_ASTAssignment(_rvalues own *[]own *ASTExpression, _lvalues own *[]own *ASTExpression) (ret: own *ASTAssignment)
+func new_ASTAssignment(_rvalues: own *[]own *ASTExpression, _lvalues: own *[]own *ASTExpression) (ret: own *ASTAssignment)
 {
 	ret = new(ASTAssignment)
 	ret._rvalues = @_rvalues
@@ -140,8 +144,8 @@ func new_ASTAssignment(_rvalues own *[]own *ASTExpression, _lvalues own *[]own *
 func (node: *ASTAssignment) copy() (ret: own *ASTAssignment)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTAssignment)
@@ -158,7 +162,7 @@ func (node: *ASTAssignment) copy_rvalues() (ret: own *[]own *ASTExpression)
 	
 	var i = 0
 	while i < len(node._rvalues) {
-		if node._rvalues[i] != nil {
+		if node._rvalues[i] != null {
 			ret[i] = node._rvalues[i].copy()
 		}
 		i++
@@ -174,7 +178,7 @@ func (node: *ASTAssignment) copy_lvalues() (ret: own *[]own *ASTExpression)
 	
 	var i = 0
 	while i < len(node._lvalues) {
-		if node._lvalues[i] != nil {
+		if node._lvalues[i] != null {
 			ret[i] = node._lvalues[i].copy()
 		}
 		i++
@@ -188,7 +192,7 @@ type ASTAssume = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTAssume(_expr own *ASTExpression) (ret: own *ASTAssume)
+func new_ASTAssume(_expr: own *ASTExpression) (ret: own *ASTAssume)
 {
 	ret = new(ASTAssume)
 	ret._expr = @_expr
@@ -197,13 +201,13 @@ func new_ASTAssume(_expr own *ASTExpression) (ret: own *ASTAssume)
 func (node: *ASTAssume) copy() (ret: own *ASTAssume)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTAssume)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -215,7 +219,7 @@ type ASTBinaryMinus = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel2Expression
 }
-func new_ASTBinaryMinus(_left own *ASTLevel3Expression, _right own *ASTLevel2Expression) (ret: own *ASTBinaryMinus)
+func new_ASTBinaryMinus(_left: own *ASTLevel3Expression, _right: own *ASTLevel2Expression) (ret: own *ASTBinaryMinus)
 {
 	ret = new(ASTBinaryMinus)
 	ret._left = @_left
@@ -225,16 +229,16 @@ func new_ASTBinaryMinus(_left own *ASTLevel3Expression, _right own *ASTLevel2Exp
 func (node: *ASTBinaryMinus) copy() (ret: own *ASTBinaryMinus)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBinaryMinus)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -246,7 +250,7 @@ type ASTBinaryPlus = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel2Expression
 }
-func new_ASTBinaryPlus(_left own *ASTLevel3Expression, _right own *ASTLevel2Expression) (ret: own *ASTBinaryPlus)
+func new_ASTBinaryPlus(_left: own *ASTLevel3Expression, _right: own *ASTLevel2Expression) (ret: own *ASTBinaryPlus)
 {
 	ret = new(ASTBinaryPlus)
 	ret._left = @_left
@@ -256,16 +260,16 @@ func new_ASTBinaryPlus(_left own *ASTLevel3Expression, _right own *ASTLevel2Expr
 func (node: *ASTBinaryPlus) copy() (ret: own *ASTBinaryPlus)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBinaryPlus)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -277,7 +281,7 @@ type ASTBitAnd = struct {
 	_left: own *ASTLevel2Expression
 	_right: own *ASTLevel1Expression
 }
-func new_ASTBitAnd(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression) (ret: own *ASTBitAnd)
+func new_ASTBitAnd(_left: own *ASTLevel2Expression, _right: own *ASTLevel1Expression) (ret: own *ASTBitAnd)
 {
 	ret = new(ASTBitAnd)
 	ret._left = @_left
@@ -287,16 +291,16 @@ func new_ASTBitAnd(_left own *ASTLevel2Expression, _right own *ASTLevel1Expressi
 func (node: *ASTBitAnd) copy() (ret: own *ASTBitAnd)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBitAnd)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -308,7 +312,7 @@ type ASTBitOr = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel2Expression
 }
-func new_ASTBitOr(_left own *ASTLevel3Expression, _right own *ASTLevel2Expression) (ret: own *ASTBitOr)
+func new_ASTBitOr(_left: own *ASTLevel3Expression, _right: own *ASTLevel2Expression) (ret: own *ASTBitOr)
 {
 	ret = new(ASTBitOr)
 	ret._left = @_left
@@ -318,16 +322,16 @@ func new_ASTBitOr(_left own *ASTLevel3Expression, _right own *ASTLevel2Expressio
 func (node: *ASTBitOr) copy() (ret: own *ASTBitOr)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBitOr)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -339,7 +343,7 @@ type ASTBitXor = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel2Expression
 }
-func new_ASTBitXor(_left own *ASTLevel3Expression, _right own *ASTLevel2Expression) (ret: own *ASTBitXor)
+func new_ASTBitXor(_left: own *ASTLevel3Expression, _right: own *ASTLevel2Expression) (ret: own *ASTBitXor)
 {
 	ret = new(ASTBitXor)
 	ret._left = @_left
@@ -349,16 +353,16 @@ func new_ASTBitXor(_left own *ASTLevel3Expression, _right own *ASTLevel2Expressi
 func (node: *ASTBitXor) copy() (ret: own *ASTBitXor)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBitXor)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -369,7 +373,7 @@ type ASTBlock = struct {
 	
 	_statements: own *[]own *ASTStatement
 }
-func new_ASTBlock(_statements own *[]own *ASTStatement) (ret: own *ASTBlock)
+func new_ASTBlock(_statements: own *[]own *ASTStatement) (ret: own *ASTBlock)
 {
 	ret = new(ASTBlock)
 	ret._statements = @_statements
@@ -378,8 +382,8 @@ func new_ASTBlock(_statements own *[]own *ASTStatement) (ret: own *ASTBlock)
 func (node: *ASTBlock) copy() (ret: own *ASTBlock)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBlock)
@@ -395,7 +399,7 @@ func (node: *ASTBlock) copy_statements() (ret: own *[]own *ASTStatement)
 	
 	var i = 0
 	while i < len(node._statements) {
-		if node._statements[i] != nil {
+		if node._statements[i] != null {
 			ret[i] = node._statements[i].copy()
 		}
 		i++
@@ -409,7 +413,7 @@ type ASTBreak = struct {
 	
 	_label: own *string
 }
-func new_ASTBreak(_label own *string) (ret: own *ASTBreak)
+func new_ASTBreak(_label: own *string) (ret: own *ASTBreak)
 {
 	ret = new(ASTBreak)
 	ret._label = @_label
@@ -418,8 +422,8 @@ func new_ASTBreak(_label own *string) (ret: own *ASTBreak)
 func (node: *ASTBreak) copy() (ret: own *ASTBreak)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTBreak)
@@ -434,7 +438,7 @@ type ASTChar = struct {
 	
 	_str: string
 }
-func new_ASTChar(_str string) (ret: own *ASTChar)
+func new_ASTChar(_str: string) (ret: own *ASTChar)
 {
 	ret = new(ASTChar)
 	ret._str = @_str
@@ -443,8 +447,8 @@ func new_ASTChar(_str string) (ret: own *ASTChar)
 func (node: *ASTChar) copy() (ret: own *ASTChar)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTChar)
@@ -458,7 +462,7 @@ type ASTContinue = struct {
 	
 	_label: own *string
 }
-func new_ASTContinue(_label own *string) (ret: own *ASTContinue)
+func new_ASTContinue(_label: own *string) (ret: own *ASTContinue)
 {
 	ret = new(ASTContinue)
 	ret._label = @_label
@@ -467,8 +471,8 @@ func new_ASTContinue(_label own *string) (ret: own *ASTContinue)
 func (node: *ASTContinue) copy() (ret: own *ASTContinue)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTContinue)
@@ -483,7 +487,7 @@ type ASTDecimal = struct {
 	
 	_str: string
 }
-func new_ASTDecimal(_str string) (ret: own *ASTDecimal)
+func new_ASTDecimal(_str: string) (ret: own *ASTDecimal)
 {
 	ret = new(ASTDecimal)
 	ret._str = @_str
@@ -492,8 +496,8 @@ func new_ASTDecimal(_str string) (ret: own *ASTDecimal)
 func (node: *ASTDecimal) copy() (ret: own *ASTDecimal)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTDecimal)
@@ -507,7 +511,7 @@ type ASTDecrement = struct {
 	
 	_lvalue: own *ASTExpression
 }
-func new_ASTDecrement(_lvalue own *ASTExpression) (ret: own *ASTDecrement)
+func new_ASTDecrement(_lvalue: own *ASTExpression) (ret: own *ASTDecrement)
 {
 	ret = new(ASTDecrement)
 	ret._lvalue = @_lvalue
@@ -516,13 +520,13 @@ func new_ASTDecrement(_lvalue own *ASTExpression) (ret: own *ASTDecrement)
 func (node: *ASTDecrement) copy() (ret: own *ASTDecrement)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTDecrement)
 	
-	if node._lvalue != nil {
+	if node._lvalue != null {
 		ret._lvalue = node._lvalue.copy()
 	}
 	
@@ -533,7 +537,7 @@ type ASTDefaultCase = struct {
 	
 	_body: own *ASTBlock
 }
-func new_ASTDefaultCase(_body own *ASTBlock) (ret: own *ASTDefaultCase)
+func new_ASTDefaultCase(_body: own *ASTBlock) (ret: own *ASTDefaultCase)
 {
 	ret = new(ASTDefaultCase)
 	ret._body = @_body
@@ -542,13 +546,13 @@ func new_ASTDefaultCase(_body own *ASTBlock) (ret: own *ASTDefaultCase)
 func (node: *ASTDefaultCase) copy() (ret: own *ASTDefaultCase)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTDefaultCase)
 	
-	if node._body != nil {
+	if node._body != null {
 		ret._body = node._body.copy()
 	}
 	
@@ -559,7 +563,7 @@ type ASTDelete = struct {
 	
 	_arg: own *ASTExpression
 }
-func new_ASTDelete(_arg own *ASTExpression) (ret: own *ASTDelete)
+func new_ASTDelete(_arg: own *ASTExpression) (ret: own *ASTDelete)
 {
 	ret = new(ASTDelete)
 	ret._arg = @_arg
@@ -568,13 +572,13 @@ func new_ASTDelete(_arg own *ASTExpression) (ret: own *ASTDelete)
 func (node: *ASTDelete) copy() (ret: own *ASTDelete)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTDelete)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -585,7 +589,7 @@ type ASTDeref = struct {
 	
 	_arg: own *ASTLevel1Expression
 }
-func new_ASTDeref(_arg own *ASTLevel1Expression) (ret: own *ASTDeref)
+func new_ASTDeref(_arg: own *ASTLevel1Expression) (ret: own *ASTDeref)
 {
 	ret = new(ASTDeref)
 	ret._arg = @_arg
@@ -594,13 +598,13 @@ func new_ASTDeref(_arg own *ASTLevel1Expression) (ret: own *ASTDeref)
 func (node: *ASTDeref) copy() (ret: own *ASTDeref)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTDeref)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -612,7 +616,7 @@ type ASTDiv = struct {
 	_left: own *ASTLevel2Expression
 	_right: own *ASTLevel1Expression
 }
-func new_ASTDiv(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression) (ret: own *ASTDiv)
+func new_ASTDiv(_left: own *ASTLevel2Expression, _right: own *ASTLevel1Expression) (ret: own *ASTDiv)
 {
 	ret = new(ASTDiv)
 	ret._left = @_left
@@ -622,16 +626,16 @@ func new_ASTDiv(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression)
 func (node: *ASTDiv) copy() (ret: own *ASTDiv)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTDiv)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -643,7 +647,7 @@ type ASTEnsures = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTEnsures(_expr own *ASTExpression) (ret: own *ASTEnsures)
+func new_ASTEnsures(_expr: own *ASTExpression) (ret: own *ASTEnsures)
 {
 	ret = new(ASTEnsures)
 	ret._expr = @_expr
@@ -652,13 +656,13 @@ func new_ASTEnsures(_expr own *ASTExpression) (ret: own *ASTEnsures)
 func (node: *ASTEnsures) copy() (ret: own *ASTEnsures)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTEnsures)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -670,7 +674,7 @@ type ASTEnsuresAll = struct {
 	_vars: own *[]string
 	_expr: own *ASTExpression
 }
-func new_ASTEnsuresAll(_vars own *[]string, _expr own *ASTExpression) (ret: own *ASTEnsuresAll)
+func new_ASTEnsuresAll(_vars: own *[]string, _expr: own *ASTExpression) (ret: own *ASTEnsuresAll)
 {
 	ret = new(ASTEnsuresAll)
 	ret._vars = @_vars
@@ -680,14 +684,14 @@ func new_ASTEnsuresAll(_vars own *[]string, _expr own *ASTExpression) (ret: own 
 func (node: *ASTEnsuresAll) copy() (ret: own *ASTEnsuresAll)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTEnsuresAll)
 	
 	ret._vars = node.copy_vars()
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -698,7 +702,11 @@ func (node: *ASTEnsuresAll) copy_vars() (ret: own *[]string)
 	
 	ret = new[len(node._vars)](string)
 	
-	copy(ret, node._vars)
+	var i = 0
+	while i < len(ret) {
+		ret[i] = node._vars[i]
+		i++
+	}
 	
 	return
 }
@@ -708,7 +716,7 @@ type ASTEqual = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel3Expression
 }
-func new_ASTEqual(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression) (ret: own *ASTEqual)
+func new_ASTEqual(_left: own *ASTLevel3Expression, _right: own *ASTLevel3Expression) (ret: own *ASTEqual)
 {
 	ret = new(ASTEqual)
 	ret._left = @_left
@@ -718,29 +726,29 @@ func new_ASTEqual(_left own *ASTLevel3Expression, _right own *ASTLevel3Expressio
 func (node: *ASTEqual) copy() (ret: own *ASTEqual)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTEqual)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
 	return ret
 }
-type ASTExpression = Level6Expression
+type ASTExpression = Or | Level5Expression
 type ASTFail = struct {
 	ASTBase
 	
 	_code: string
 	_description: own *string
 }
-func new_ASTFail(_code string, _description own *string) (ret: own *ASTFail)
+func new_ASTFail(_code: string, _description: own *string) (ret: own *ASTFail)
 {
 	ret = new(ASTFail)
 	ret._code = @_code
@@ -750,8 +758,8 @@ func new_ASTFail(_code string, _description own *string) (ret: own *ASTFail)
 func (node: *ASTFail) copy() (ret: own *ASTFail)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTFail)
@@ -768,7 +776,7 @@ type ASTFailRecover = struct {
 	_stmt: own *ASTRecoverable
 	_recover_block: own *ASTBlock
 }
-func new_ASTFailRecover(_stmt own *ASTRecoverable, _recover_block own *ASTBlock) (ret: own *ASTFailRecover)
+func new_ASTFailRecover(_stmt: own *ASTRecoverable, _recover_block: own *ASTBlock) (ret: own *ASTFailRecover)
 {
 	ret = new(ASTFailRecover)
 	ret._stmt = @_stmt
@@ -778,20 +786,60 @@ func new_ASTFailRecover(_stmt own *ASTRecoverable, _recover_block own *ASTBlock)
 func (node: *ASTFailRecover) copy() (ret: own *ASTFailRecover)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTFailRecover)
 	
-	if node._stmt != nil {
+	if node._stmt != null {
 		ret._stmt = node._stmt.copy()
 	}
-	if node._recover_block != nil {
+	if node._recover_block != null {
 		ret._recover_block = node._recover_block.copy()
 	}
 	
 	return ret
+}
+type ASTFile = struct {
+	ASTBase
+	
+	_globals: own *[]own *ASTGlobal
+}
+func new_ASTFile(_globals: own *[]own *ASTGlobal) (ret: own *ASTFile)
+{
+	ret = new(ASTFile)
+	ret._globals = @_globals
+	return ret
+}
+func (node: *ASTFile) copy() (ret: own *ASTFile)
+{
+	
+	if node == null {
+		return null
+	}
+	
+	ret = new(ASTFile)
+	
+	ret._globals = node.copy_globals()
+	
+	return ret
+}
+func (node: *ASTFile) copy_globals() (ret: own *[]own *ASTGlobal)
+{
+	
+	ret = new[len(node._globals)](own *ASTGlobal)
+	
+	var i = 0
+	while i < len(node._globals) {
+		if node._globals[i] != null {
+			ret[i] = node._globals[i].copy()
+		}
+		i++
+	}
+	
+	
+	return
 }
 type ASTGlobal = Method | Typedef
 type ASTGreater = struct {
@@ -800,7 +848,7 @@ type ASTGreater = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel3Expression
 }
-func new_ASTGreater(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression) (ret: own *ASTGreater)
+func new_ASTGreater(_left: own *ASTLevel3Expression, _right: own *ASTLevel3Expression) (ret: own *ASTGreater)
 {
 	ret = new(ASTGreater)
 	ret._left = @_left
@@ -810,16 +858,16 @@ func new_ASTGreater(_left own *ASTLevel3Expression, _right own *ASTLevel3Express
 func (node: *ASTGreater) copy() (ret: own *ASTGreater)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTGreater)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -831,7 +879,7 @@ type ASTGreaterEq = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel3Expression
 }
-func new_ASTGreaterEq(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression) (ret: own *ASTGreaterEq)
+func new_ASTGreaterEq(_left: own *ASTLevel3Expression, _right: own *ASTLevel3Expression) (ret: own *ASTGreaterEq)
 {
 	ret = new(ASTGreaterEq)
 	ret._left = @_left
@@ -841,16 +889,16 @@ func new_ASTGreaterEq(_left own *ASTLevel3Expression, _right own *ASTLevel3Expre
 func (node: *ASTGreaterEq) copy() (ret: own *ASTGreaterEq)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTGreaterEq)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -861,7 +909,7 @@ type ASTHexaDecimal = struct {
 	
 	_str: string
 }
-func new_ASTHexaDecimal(_str string) (ret: own *ASTHexaDecimal)
+func new_ASTHexaDecimal(_str: string) (ret: own *ASTHexaDecimal)
 {
 	ret = new(ASTHexaDecimal)
 	ret._str = @_str
@@ -870,8 +918,8 @@ func new_ASTHexaDecimal(_str string) (ret: own *ASTHexaDecimal)
 func (node: *ASTHexaDecimal) copy() (ret: own *ASTHexaDecimal)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTHexaDecimal)
@@ -885,7 +933,7 @@ type ASTIdentifier = struct {
 	
 	_ident: string
 }
-func new_ASTIdentifier(_ident string) (ret: own *ASTIdentifier)
+func new_ASTIdentifier(_ident: string) (ret: own *ASTIdentifier)
 {
 	ret = new(ASTIdentifier)
 	ret._ident = @_ident
@@ -894,8 +942,8 @@ func new_ASTIdentifier(_ident string) (ret: own *ASTIdentifier)
 func (node: *ASTIdentifier) copy() (ret: own *ASTIdentifier)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTIdentifier)
@@ -911,7 +959,7 @@ type ASTIf = struct {
 	_true_branch: own *ASTBlock
 	_false_branch: own *ASTElseBranch
 }
-func new_ASTIf(_condition own *ASTExpression, _true_branch own *ASTBlock, _false_branch own *ASTElseBranch) (ret: own *ASTIf)
+func new_ASTIf(_condition: own *ASTExpression, _true_branch: own *ASTBlock, _false_branch: own *ASTElseBranch) (ret: own *ASTIf)
 {
 	ret = new(ASTIf)
 	ret._condition = @_condition
@@ -922,19 +970,19 @@ func new_ASTIf(_condition own *ASTExpression, _true_branch own *ASTBlock, _false
 func (node: *ASTIf) copy() (ret: own *ASTIf)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTIf)
 	
-	if node._condition != nil {
+	if node._condition != null {
 		ret._condition = node._condition.copy()
 	}
-	if node._true_branch != nil {
+	if node._true_branch != null {
 		ret._true_branch = node._true_branch.copy()
 	}
-	if node._false_branch != nil {
+	if node._false_branch != null {
 		ret._false_branch = node._false_branch.copy()
 	}
 	
@@ -945,7 +993,7 @@ type ASTIncrement = struct {
 	
 	_lvalue: own *ASTExpression
 }
-func new_ASTIncrement(_lvalue own *ASTExpression) (ret: own *ASTIncrement)
+func new_ASTIncrement(_lvalue: own *ASTExpression) (ret: own *ASTIncrement)
 {
 	ret = new(ASTIncrement)
 	ret._lvalue = @_lvalue
@@ -954,13 +1002,13 @@ func new_ASTIncrement(_lvalue own *ASTExpression) (ret: own *ASTIncrement)
 func (node: *ASTIncrement) copy() (ret: own *ASTIncrement)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTIncrement)
 	
-	if node._lvalue != nil {
+	if node._lvalue != null {
 		ret._lvalue = node._lvalue.copy()
 	}
 	
@@ -972,7 +1020,7 @@ type ASTIndexed = struct {
 	_base: own *ASTLevel0Expression
 	_index: own *ASTExpression
 }
-func new_ASTIndexed(_base own *ASTLevel0Expression, _index own *ASTExpression) (ret: own *ASTIndexed)
+func new_ASTIndexed(_base: own *ASTLevel0Expression, _index: own *ASTExpression) (ret: own *ASTIndexed)
 {
 	ret = new(ASTIndexed)
 	ret._base = @_base
@@ -982,16 +1030,16 @@ func new_ASTIndexed(_base own *ASTLevel0Expression, _index own *ASTExpression) (
 func (node: *ASTIndexed) copy() (ret: own *ASTIndexed)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTIndexed)
 	
-	if node._base != nil {
+	if node._base != null {
 		ret._base = node._base.copy()
 	}
-	if node._index != nil {
+	if node._index != null {
 		ret._index = node._index.copy()
 	}
 	
@@ -1003,7 +1051,7 @@ type ASTInequal = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel3Expression
 }
-func new_ASTInequal(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression) (ret: own *ASTInequal)
+func new_ASTInequal(_left: own *ASTLevel3Expression, _right: own *ASTLevel3Expression) (ret: own *ASTInequal)
 {
 	ret = new(ASTInequal)
 	ret._left = @_left
@@ -1013,16 +1061,16 @@ func new_ASTInequal(_left own *ASTLevel3Expression, _right own *ASTLevel3Express
 func (node: *ASTInequal) copy() (ret: own *ASTInequal)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTInequal)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1034,7 +1082,7 @@ type ASTInterfaceMember = struct {
 	_name: string
 	_signature: own *ASTMethodSignature
 }
-func new_ASTInterfaceMember(_name string, _signature own *ASTMethodSignature) (ret: own *ASTInterfaceMember)
+func new_ASTInterfaceMember(_name: string, _signature: own *ASTMethodSignature) (ret: own *ASTInterfaceMember)
 {
 	ret = new(ASTInterfaceMember)
 	ret._name = @_name
@@ -1044,14 +1092,14 @@ func new_ASTInterfaceMember(_name string, _signature own *ASTMethodSignature) (r
 func (node: *ASTInterfaceMember) copy() (ret: own *ASTInterfaceMember)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTInterfaceMember)
 	
 	ret._name = node._name
-	if node._signature != nil {
+	if node._signature != null {
 		ret._signature = node._signature.copy()
 	}
 	
@@ -1062,7 +1110,7 @@ type ASTInterfaceType = struct {
 	
 	_members: own *[]own *ASTInterfaceMember
 }
-func new_ASTInterfaceType(_members own *[]own *ASTInterfaceMember) (ret: own *ASTInterfaceType)
+func new_ASTInterfaceType(_members: own *[]own *ASTInterfaceMember) (ret: own *ASTInterfaceType)
 {
 	ret = new(ASTInterfaceType)
 	ret._members = @_members
@@ -1071,8 +1119,8 @@ func new_ASTInterfaceType(_members own *[]own *ASTInterfaceMember) (ret: own *AS
 func (node: *ASTInterfaceType) copy() (ret: own *ASTInterfaceType)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTInterfaceType)
@@ -1088,7 +1136,7 @@ func (node: *ASTInterfaceType) copy_members() (ret: own *[]own *ASTInterfaceMemb
 	
 	var i = 0
 	while i < len(node._members) {
-		if node._members[i] != nil {
+		if node._members[i] != null {
 			ret[i] = node._members[i].copy()
 		}
 		i++
@@ -1102,7 +1150,7 @@ type ASTInvariant = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTInvariant(_expr own *ASTExpression) (ret: own *ASTInvariant)
+func new_ASTInvariant(_expr: own *ASTExpression) (ret: own *ASTInvariant)
 {
 	ret = new(ASTInvariant)
 	ret._expr = @_expr
@@ -1111,13 +1159,13 @@ func new_ASTInvariant(_expr own *ASTExpression) (ret: own *ASTInvariant)
 func (node: *ASTInvariant) copy() (ret: own *ASTInvariant)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTInvariant)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1129,7 +1177,7 @@ type ASTInvariantAll = struct {
 	_vars: own *[]string
 	_expr: own *ASTExpression
 }
-func new_ASTInvariantAll(_vars own *[]string, _expr own *ASTExpression) (ret: own *ASTInvariantAll)
+func new_ASTInvariantAll(_vars: own *[]string, _expr: own *ASTExpression) (ret: own *ASTInvariantAll)
 {
 	ret = new(ASTInvariantAll)
 	ret._vars = @_vars
@@ -1139,14 +1187,14 @@ func new_ASTInvariantAll(_vars own *[]string, _expr own *ASTExpression) (ret: ow
 func (node: *ASTInvariantAll) copy() (ret: own *ASTInvariantAll)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTInvariantAll)
 	
 	ret._vars = node.copy_vars()
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1157,7 +1205,11 @@ func (node: *ASTInvariantAll) copy_vars() (ret: own *[]string)
 	
 	ret = new[len(node._vars)](string)
 	
-	copy(ret, node._vars)
+	var i = 0
+	while i < len(ret) {
+		ret[i] = node._vars[i]
+		i++
+	}
 	
 	return
 }
@@ -1167,7 +1219,7 @@ type ASTIs = struct {
 	_arg: own *ASTLevel3Expression
 	_type: own *ASTType
 }
-func new_ASTIs(_arg own *ASTLevel3Expression, _type own *ASTType) (ret: own *ASTIs)
+func new_ASTIs(_arg: own *ASTLevel3Expression, _type: own *ASTType) (ret: own *ASTIs)
 {
 	ret = new(ASTIs)
 	ret._arg = @_arg
@@ -1177,16 +1229,16 @@ func new_ASTIs(_arg own *ASTLevel3Expression, _type own *ASTType) (ret: own *AST
 func (node: *ASTIs) copy() (ret: own *ASTIs)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTIs)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -1198,7 +1250,7 @@ type ASTLShift = struct {
 	_left: own *ASTLevel2Expression
 	_right: own *ASTLevel1Expression
 }
-func new_ASTLShift(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression) (ret: own *ASTLShift)
+func new_ASTLShift(_left: own *ASTLevel2Expression, _right: own *ASTLevel1Expression) (ret: own *ASTLShift)
 {
 	ret = new(ASTLShift)
 	ret._left = @_left
@@ -1208,16 +1260,16 @@ func new_ASTLShift(_left own *ASTLevel2Expression, _right own *ASTLevel1Expressi
 func (node: *ASTLShift) copy() (ret: own *ASTLShift)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTLShift)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1229,7 +1281,7 @@ type ASTLess = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel3Expression
 }
-func new_ASTLess(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression) (ret: own *ASTLess)
+func new_ASTLess(_left: own *ASTLevel3Expression, _right: own *ASTLevel3Expression) (ret: own *ASTLess)
 {
 	ret = new(ASTLess)
 	ret._left = @_left
@@ -1239,16 +1291,16 @@ func new_ASTLess(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression
 func (node: *ASTLess) copy() (ret: own *ASTLess)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTLess)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1260,7 +1312,7 @@ type ASTLessEq = struct {
 	_left: own *ASTLevel3Expression
 	_right: own *ASTLevel3Expression
 }
-func new_ASTLessEq(_left own *ASTLevel3Expression, _right own *ASTLevel3Expression) (ret: own *ASTLessEq)
+func new_ASTLessEq(_left: own *ASTLevel3Expression, _right: own *ASTLevel3Expression) (ret: own *ASTLessEq)
 {
 	ret = new(ASTLessEq)
 	ret._left = @_left
@@ -1270,16 +1322,16 @@ func new_ASTLessEq(_left own *ASTLevel3Expression, _right own *ASTLevel3Expressi
 func (node: *ASTLessEq) copy() (ret: own *ASTLessEq)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTLessEq)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1291,14 +1343,13 @@ type ASTLevel2Expression = Mult | Div | Mod | LShift | RShift | BitAnd | Level1E
 type ASTLevel3Expression = BinaryPlus | BinaryMinus | BitOr | BitXor | Level2Expression
 type ASTLevel4Expression = Less | LessEq | Greater | GreaterEq | Equal | Inequal | Is | Level3Expression
 type ASTLevel5Expression = And | Level4Expression
-type ASTLevel6Expression = Or | Level5Expression
 type ASTLiteral = Decimal | Octal | HexaDecimal | String | Char
 type ASTLoopBound = struct {
 	ASTBase
 	
 	_expr: own *ASTExpression
 }
-func new_ASTLoopBound(_expr own *ASTExpression) (ret: own *ASTLoopBound)
+func new_ASTLoopBound(_expr: own *ASTExpression) (ret: own *ASTLoopBound)
 {
 	ret = new(ASTLoopBound)
 	ret._expr = @_expr
@@ -1307,13 +1358,13 @@ func new_ASTLoopBound(_expr own *ASTExpression) (ret: own *ASTLoopBound)
 func (node: *ASTLoopBound) copy() (ret: own *ASTLoopBound)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTLoopBound)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1324,7 +1375,7 @@ type ASTMayFail = struct {
 	
 	_fail_list: own *[]string
 }
-func new_ASTMayFail(_fail_list own *[]string) (ret: own *ASTMayFail)
+func new_ASTMayFail(_fail_list: own *[]string) (ret: own *ASTMayFail)
 {
 	ret = new(ASTMayFail)
 	ret._fail_list = @_fail_list
@@ -1333,8 +1384,8 @@ func new_ASTMayFail(_fail_list own *[]string) (ret: own *ASTMayFail)
 func (node: *ASTMayFail) copy() (ret: own *ASTMayFail)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTMayFail)
@@ -1348,7 +1399,11 @@ func (node: *ASTMayFail) copy_fail_list() (ret: own *[]string)
 	
 	ret = new[len(node._fail_list)](string)
 	
-	copy(ret, node._fail_list)
+	var i = 0
+	while i < len(ret) {
+		ret[i] = node._fail_list[i]
+		i++
+	}
 	
 	return
 }
@@ -1361,7 +1416,7 @@ type ASTMethod = struct {
 	_contracts: own *[]own *ASTMethodContract
 	_body: own *ASTBlock
 }
-func new_ASTMethod(_receiver own *ASTParameter, _name string, _signature own *ASTMethodSignature, _contracts own *[]own *ASTMethodContract, _body own *ASTBlock) (ret: own *ASTMethod)
+func new_ASTMethod(_receiver: own *ASTParameter, _name: string, _signature: own *ASTMethodSignature, _contracts: own *[]own *ASTMethodContract, _body: own *ASTBlock) (ret: own *ASTMethod)
 {
 	ret = new(ASTMethod)
 	ret._receiver = @_receiver
@@ -1374,21 +1429,21 @@ func new_ASTMethod(_receiver own *ASTParameter, _name string, _signature own *AS
 func (node: *ASTMethod) copy() (ret: own *ASTMethod)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTMethod)
 	
-	if node._receiver != nil {
+	if node._receiver != null {
 		ret._receiver = node._receiver.copy()
 	}
 	ret._name = node._name
-	if node._signature != nil {
+	if node._signature != null {
 		ret._signature = node._signature.copy()
 	}
 	ret._contracts = node.copy_contracts()
-	if node._body != nil {
+	if node._body != null {
 		ret._body = node._body.copy()
 	}
 	
@@ -1401,7 +1456,7 @@ func (node: *ASTMethod) copy_contracts() (ret: own *[]own *ASTMethodContract)
 	
 	var i = 0
 	while i < len(node._contracts) {
-		if node._contracts[i] != nil {
+		if node._contracts[i] != null {
 			ret[i] = node._contracts[i].copy()
 		}
 		i++
@@ -1417,7 +1472,7 @@ type ASTMethodCall = struct {
 	_method: string
 	_args: own *[]own *ASTExpression
 }
-func new_ASTMethodCall(_receiver own *ASTLevel0Expression, _method string, _args own *[]own *ASTExpression) (ret: own *ASTMethodCall)
+func new_ASTMethodCall(_receiver: own *ASTLevel0Expression, _method: string, _args: own *[]own *ASTExpression) (ret: own *ASTMethodCall)
 {
 	ret = new(ASTMethodCall)
 	ret._receiver = @_receiver
@@ -1428,13 +1483,13 @@ func new_ASTMethodCall(_receiver own *ASTLevel0Expression, _method string, _args
 func (node: *ASTMethodCall) copy() (ret: own *ASTMethodCall)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTMethodCall)
 	
-	if node._receiver != nil {
+	if node._receiver != null {
 		ret._receiver = node._receiver.copy()
 	}
 	ret._method = node._method
@@ -1449,7 +1504,7 @@ func (node: *ASTMethodCall) copy_args() (ret: own *[]own *ASTExpression)
 	
 	var i = 0
 	while i < len(node._args) {
-		if node._args[i] != nil {
+		if node._args[i] != null {
 			ret[i] = node._args[i].copy()
 		}
 		i++
@@ -1465,7 +1520,7 @@ type ASTMethodSignature = struct {
 	_in_params: own *[]own *ASTParameter
 	_out_params: own *[]own *ASTParameter
 }
-func new_ASTMethodSignature(_in_params own *[]own *ASTParameter, _out_params own *[]own *ASTParameter) (ret: own *ASTMethodSignature)
+func new_ASTMethodSignature(_in_params: own *[]own *ASTParameter, _out_params: own *[]own *ASTParameter) (ret: own *ASTMethodSignature)
 {
 	ret = new(ASTMethodSignature)
 	ret._in_params = @_in_params
@@ -1475,8 +1530,8 @@ func new_ASTMethodSignature(_in_params own *[]own *ASTParameter, _out_params own
 func (node: *ASTMethodSignature) copy() (ret: own *ASTMethodSignature)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTMethodSignature)
@@ -1493,7 +1548,7 @@ func (node: *ASTMethodSignature) copy_in_params() (ret: own *[]own *ASTParameter
 	
 	var i = 0
 	while i < len(node._in_params) {
-		if node._in_params[i] != nil {
+		if node._in_params[i] != null {
 			ret[i] = node._in_params[i].copy()
 		}
 		i++
@@ -1509,7 +1564,7 @@ func (node: *ASTMethodSignature) copy_out_params() (ret: own *[]own *ASTParamete
 	
 	var i = 0
 	while i < len(node._out_params) {
-		if node._out_params[i] != nil {
+		if node._out_params[i] != null {
 			ret[i] = node._out_params[i].copy()
 		}
 		i++
@@ -1524,7 +1579,7 @@ type ASTMod = struct {
 	_left: own *ASTLevel2Expression
 	_right: own *ASTLevel1Expression
 }
-func new_ASTMod(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression) (ret: own *ASTMod)
+func new_ASTMod(_left: own *ASTLevel2Expression, _right: own *ASTLevel1Expression) (ret: own *ASTMod)
 {
 	ret = new(ASTMod)
 	ret._left = @_left
@@ -1534,16 +1589,16 @@ func new_ASTMod(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression)
 func (node: *ASTMod) copy() (ret: own *ASTMod)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTMod)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1555,7 +1610,7 @@ type ASTMult = struct {
 	_left: own *ASTLevel2Expression
 	_right: own *ASTLevel1Expression
 }
-func new_ASTMult(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression) (ret: own *ASTMult)
+func new_ASTMult(_left: own *ASTLevel2Expression, _right: own *ASTLevel1Expression) (ret: own *ASTMult)
 {
 	ret = new(ASTMult)
 	ret._left = @_left
@@ -1565,16 +1620,16 @@ func new_ASTMult(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression
 func (node: *ASTMult) copy() (ret: own *ASTMult)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTMult)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1586,7 +1641,7 @@ type ASTNew = struct {
 	
 	_type: own *ASTType
 }
-func new_ASTNew(_type own *ASTType) (ret: own *ASTNew)
+func new_ASTNew(_type: own *ASTType) (ret: own *ASTNew)
 {
 	ret = new(ASTNew)
 	ret._type = @_type
@@ -1595,13 +1650,13 @@ func new_ASTNew(_type own *ASTType) (ret: own *ASTNew)
 func (node: *ASTNew) copy() (ret: own *ASTNew)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTNew)
 	
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -1613,7 +1668,7 @@ type ASTNewArray = struct {
 	_length: own *ASTExpression
 	_type: own *ASTType
 }
-func new_ASTNewArray(_length own *ASTExpression, _type own *ASTType) (ret: own *ASTNewArray)
+func new_ASTNewArray(_length: own *ASTExpression, _type: own *ASTType) (ret: own *ASTNewArray)
 {
 	ret = new(ASTNewArray)
 	ret._length = @_length
@@ -1623,16 +1678,16 @@ func new_ASTNewArray(_length own *ASTExpression, _type own *ASTType) (ret: own *
 func (node: *ASTNewArray) copy() (ret: own *ASTNewArray)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTNewArray)
 	
-	if node._length != nil {
+	if node._length != null {
 		ret._length = node._length.copy()
 	}
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -1643,7 +1698,7 @@ type ASTNot = struct {
 	
 	_arg: own *ASTLevel1Expression
 }
-func new_ASTNot(_arg own *ASTLevel1Expression) (ret: own *ASTNot)
+func new_ASTNot(_arg: own *ASTLevel1Expression) (ret: own *ASTNot)
 {
 	ret = new(ASTNot)
 	ret._arg = @_arg
@@ -1652,13 +1707,13 @@ func new_ASTNot(_arg own *ASTLevel1Expression) (ret: own *ASTNot)
 func (node: *ASTNot) copy() (ret: own *ASTNot)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTNot)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -1669,7 +1724,7 @@ type ASTOctal = struct {
 	
 	_str: string
 }
-func new_ASTOctal(_str string) (ret: own *ASTOctal)
+func new_ASTOctal(_str: string) (ret: own *ASTOctal)
 {
 	ret = new(ASTOctal)
 	ret._str = @_str
@@ -1678,8 +1733,8 @@ func new_ASTOctal(_str string) (ret: own *ASTOctal)
 func (node: *ASTOctal) copy() (ret: own *ASTOctal)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTOctal)
@@ -1691,10 +1746,10 @@ func (node: *ASTOctal) copy() (ret: own *ASTOctal)
 type ASTOr = struct {
 	ASTBase
 	
-	_left: own *ASTLevel6Expression
+	_left: own *ASTExpression
 	_right: own *ASTLevel5Expression
 }
-func new_ASTOr(_left own *ASTLevel6Expression, _right own *ASTLevel5Expression) (ret: own *ASTOr)
+func new_ASTOr(_left: own *ASTExpression, _right: own *ASTLevel5Expression) (ret: own *ASTOr)
 {
 	ret = new(ASTOr)
 	ret._left = @_left
@@ -1704,16 +1759,16 @@ func new_ASTOr(_left own *ASTLevel6Expression, _right own *ASTLevel5Expression) 
 func (node: *ASTOr) copy() (ret: own *ASTOr)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTOr)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1724,7 +1779,7 @@ type ASTPExpression = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTPExpression(_expr own *ASTExpression) (ret: own *ASTPExpression)
+func new_ASTPExpression(_expr: own *ASTExpression) (ret: own *ASTPExpression)
 {
 	ret = new(ASTPExpression)
 	ret._expr = @_expr
@@ -1733,13 +1788,13 @@ func new_ASTPExpression(_expr own *ASTExpression) (ret: own *ASTPExpression)
 func (node: *ASTPExpression) copy() (ret: own *ASTPExpression)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTPExpression)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1751,7 +1806,7 @@ type ASTParameter = struct {
 	_name: own *string
 	_type: own *ASTType
 }
-func new_ASTParameter(_name own *string, _type own *ASTType) (ret: own *ASTParameter)
+func new_ASTParameter(_name: own *string, _type: own *ASTType) (ret: own *ASTParameter)
 {
 	ret = new(ASTParameter)
 	ret._name = @_name
@@ -1761,15 +1816,15 @@ func new_ASTParameter(_name own *string, _type own *ASTType) (ret: own *ASTParam
 func (node: *ASTParameter) copy() (ret: own *ASTParameter)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTParameter)
 	
 	ret._name = new(string)
 	*ret._name = *node._name
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -1782,7 +1837,7 @@ type ASTPointerType = struct {
 	_nullable: bool
 	_owned: bool
 }
-func new_ASTPointerType(_inner_type own *ASTType, _nullable bool, _owned bool) (ret: own *ASTPointerType)
+func new_ASTPointerType(_inner_type: own *ASTType, _nullable: bool, _owned: bool) (ret: own *ASTPointerType)
 {
 	ret = new(ASTPointerType)
 	ret._inner_type = @_inner_type
@@ -1793,13 +1848,13 @@ func new_ASTPointerType(_inner_type own *ASTType, _nullable bool, _owned bool) (
 func (node: *ASTPointerType) copy() (ret: own *ASTPointerType)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTPointerType)
 	
-	if node._inner_type != nil {
+	if node._inner_type != null {
 		ret._inner_type = node._inner_type.copy()
 	}
 	ret._nullable = node._nullable
@@ -1813,7 +1868,7 @@ type ASTRShift = struct {
 	_left: own *ASTLevel2Expression
 	_right: own *ASTLevel1Expression
 }
-func new_ASTRShift(_left own *ASTLevel2Expression, _right own *ASTLevel1Expression) (ret: own *ASTRShift)
+func new_ASTRShift(_left: own *ASTLevel2Expression, _right: own *ASTLevel1Expression) (ret: own *ASTRShift)
 {
 	ret = new(ASTRShift)
 	ret._left = @_left
@@ -1823,16 +1878,16 @@ func new_ASTRShift(_left own *ASTLevel2Expression, _right own *ASTLevel1Expressi
 func (node: *ASTRShift) copy() (ret: own *ASTRShift)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTRShift)
 	
-	if node._left != nil {
+	if node._left != null {
 		ret._left = node._left.copy()
 	}
-	if node._right != nil {
+	if node._right != null {
 		ret._right = node._right.copy()
 	}
 	
@@ -1844,7 +1899,7 @@ type ASTRangeType = struct {
 	_low: own *ASTExpression
 	_high: own *ASTExpression
 }
-func new_ASTRangeType(_low own *ASTExpression, _high own *ASTExpression) (ret: own *ASTRangeType)
+func new_ASTRangeType(_low: own *ASTExpression, _high: own *ASTExpression) (ret: own *ASTRangeType)
 {
 	ret = new(ASTRangeType)
 	ret._low = @_low
@@ -1854,16 +1909,16 @@ func new_ASTRangeType(_low own *ASTExpression, _high own *ASTExpression) (ret: o
 func (node: *ASTRangeType) copy() (ret: own *ASTRangeType)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTRangeType)
 	
-	if node._low != nil {
+	if node._low != null {
 		ret._low = node._low.copy()
 	}
-	if node._high != nil {
+	if node._high != null {
 		ret._high = node._high.copy()
 	}
 	
@@ -1875,7 +1930,7 @@ type ASTRecursionBound = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTRecursionBound(_expr own *ASTExpression) (ret: own *ASTRecursionBound)
+func new_ASTRecursionBound(_expr: own *ASTExpression) (ret: own *ASTRecursionBound)
 {
 	ret = new(ASTRecursionBound)
 	ret._expr = @_expr
@@ -1884,13 +1939,13 @@ func new_ASTRecursionBound(_expr own *ASTExpression) (ret: own *ASTRecursionBoun
 func (node: *ASTRecursionBound) copy() (ret: own *ASTRecursionBound)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTRecursionBound)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1901,7 +1956,7 @@ type ASTRef = struct {
 	
 	_arg: own *ASTLevel1Expression
 }
-func new_ASTRef(_arg own *ASTLevel1Expression) (ret: own *ASTRef)
+func new_ASTRef(_arg: own *ASTLevel1Expression) (ret: own *ASTRef)
 {
 	ret = new(ASTRef)
 	ret._arg = @_arg
@@ -1910,13 +1965,13 @@ func new_ASTRef(_arg own *ASTLevel1Expression) (ret: own *ASTRef)
 func (node: *ASTRef) copy() (ret: own *ASTRef)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTRef)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -1927,7 +1982,7 @@ type ASTRequires = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTRequires(_expr own *ASTExpression) (ret: own *ASTRequires)
+func new_ASTRequires(_expr: own *ASTExpression) (ret: own *ASTRequires)
 {
 	ret = new(ASTRequires)
 	ret._expr = @_expr
@@ -1936,13 +1991,13 @@ func new_ASTRequires(_expr own *ASTExpression) (ret: own *ASTRequires)
 func (node: *ASTRequires) copy() (ret: own *ASTRequires)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTRequires)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1954,7 +2009,7 @@ type ASTRequiresAll = struct {
 	_vars: own *[]string
 	_expr: own *ASTExpression
 }
-func new_ASTRequiresAll(_vars own *[]string, _expr own *ASTExpression) (ret: own *ASTRequiresAll)
+func new_ASTRequiresAll(_vars: own *[]string, _expr: own *ASTExpression) (ret: own *ASTRequiresAll)
 {
 	ret = new(ASTRequiresAll)
 	ret._vars = @_vars
@@ -1964,14 +2019,14 @@ func new_ASTRequiresAll(_vars own *[]string, _expr own *ASTExpression) (ret: own
 func (node: *ASTRequiresAll) copy() (ret: own *ASTRequiresAll)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTRequiresAll)
 	
 	ret._vars = node.copy_vars()
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -1982,7 +2037,11 @@ func (node: *ASTRequiresAll) copy_vars() (ret: own *[]string)
 	
 	ret = new[len(node._vars)](string)
 	
-	copy(ret, node._vars)
+	var i = 0
+	while i < len(ret) {
+		ret[i] = node._vars[i]
+		i++
+	}
 	
 	return
 }
@@ -1991,7 +2050,7 @@ type ASTReturn = struct {
 	
 	_retvals: own *[]own *ASTExpression
 }
-func new_ASTReturn(_retvals own *[]own *ASTExpression) (ret: own *ASTReturn)
+func new_ASTReturn(_retvals: own *[]own *ASTExpression) (ret: own *ASTReturn)
 {
 	ret = new(ASTReturn)
 	ret._retvals = @_retvals
@@ -2000,8 +2059,8 @@ func new_ASTReturn(_retvals own *[]own *ASTExpression) (ret: own *ASTReturn)
 func (node: *ASTReturn) copy() (ret: own *ASTReturn)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTReturn)
@@ -2017,7 +2076,7 @@ func (node: *ASTReturn) copy_retvals() (ret: own *[]own *ASTExpression)
 	
 	var i = 0
 	while i < len(node._retvals) {
-		if node._retvals[i] != nil {
+		if node._retvals[i] != null {
 			ret[i] = node._retvals[i].copy()
 		}
 		i++
@@ -2031,7 +2090,7 @@ type ASTSanityCheck = struct {
 	
 	_expr: own *ASTExpression
 }
-func new_ASTSanityCheck(_expr own *ASTExpression) (ret: own *ASTSanityCheck)
+func new_ASTSanityCheck(_expr: own *ASTExpression) (ret: own *ASTSanityCheck)
 {
 	ret = new(ASTSanityCheck)
 	ret._expr = @_expr
@@ -2040,13 +2099,13 @@ func new_ASTSanityCheck(_expr own *ASTExpression) (ret: own *ASTSanityCheck)
 func (node: *ASTSanityCheck) copy() (ret: own *ASTSanityCheck)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTSanityCheck)
 	
-	if node._expr != nil {
+	if node._expr != null {
 		ret._expr = node._expr.copy()
 	}
 	
@@ -2057,7 +2116,7 @@ type ASTSelectionType = struct {
 	
 	_types: own *[]own *ASTType
 }
-func new_ASTSelectionType(_types own *[]own *ASTType) (ret: own *ASTSelectionType)
+func new_ASTSelectionType(_types: own *[]own *ASTType) (ret: own *ASTSelectionType)
 {
 	ret = new(ASTSelectionType)
 	ret._types = @_types
@@ -2066,8 +2125,8 @@ func new_ASTSelectionType(_types own *[]own *ASTType) (ret: own *ASTSelectionTyp
 func (node: *ASTSelectionType) copy() (ret: own *ASTSelectionType)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTSelectionType)
@@ -2083,7 +2142,7 @@ func (node: *ASTSelectionType) copy_types() (ret: own *[]own *ASTType)
 	
 	var i = 0
 	while i < len(node._types) {
-		if node._types[i] != nil {
+		if node._types[i] != null {
 			ret[i] = node._types[i].copy()
 		}
 		i++
@@ -2098,7 +2157,7 @@ type ASTSelector = struct {
 	_base: own *ASTLevel0Expression
 	_selector: string
 }
-func new_ASTSelector(_base own *ASTLevel0Expression, _selector string) (ret: own *ASTSelector)
+func new_ASTSelector(_base: own *ASTLevel0Expression, _selector: string) (ret: own *ASTSelector)
 {
 	ret = new(ASTSelector)
 	ret._base = @_base
@@ -2108,13 +2167,13 @@ func new_ASTSelector(_base own *ASTLevel0Expression, _selector string) (ret: own
 func (node: *ASTSelector) copy() (ret: own *ASTSelector)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTSelector)
 	
-	if node._base != nil {
+	if node._base != null {
 		ret._base = node._base.copy()
 	}
 	ret._selector = node._selector
@@ -2127,7 +2186,7 @@ type ASTString = struct {
 	
 	_str: string
 }
-func new_ASTString(_str string) (ret: own *ASTString)
+func new_ASTString(_str: string) (ret: own *ASTString)
 {
 	ret = new(ASTString)
 	ret._str = @_str
@@ -2136,8 +2195,8 @@ func new_ASTString(_str string) (ret: own *ASTString)
 func (node: *ASTString) copy() (ret: own *ASTString)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTString)
@@ -2152,7 +2211,7 @@ type ASTStructMember = struct {
 	_name: own *string
 	_type: own *ASTType
 }
-func new_ASTStructMember(_name own *string, _type own *ASTType) (ret: own *ASTStructMember)
+func new_ASTStructMember(_name: own *string, _type: own *ASTType) (ret: own *ASTStructMember)
 {
 	ret = new(ASTStructMember)
 	ret._name = @_name
@@ -2162,15 +2221,15 @@ func new_ASTStructMember(_name own *string, _type own *ASTType) (ret: own *ASTSt
 func (node: *ASTStructMember) copy() (ret: own *ASTStructMember)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTStructMember)
 	
 	ret._name = new(string)
 	*ret._name = *node._name
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -2181,7 +2240,7 @@ type ASTStructType = struct {
 	
 	_members: own *[]own *ASTStructMember
 }
-func new_ASTStructType(_members own *[]own *ASTStructMember) (ret: own *ASTStructType)
+func new_ASTStructType(_members: own *[]own *ASTStructMember) (ret: own *ASTStructType)
 {
 	ret = new(ASTStructType)
 	ret._members = @_members
@@ -2190,8 +2249,8 @@ func new_ASTStructType(_members own *[]own *ASTStructMember) (ret: own *ASTStruc
 func (node: *ASTStructType) copy() (ret: own *ASTStructType)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTStructType)
@@ -2207,7 +2266,7 @@ func (node: *ASTStructType) copy_members() (ret: own *[]own *ASTStructMember)
 	
 	var i = 0
 	while i < len(node._members) {
-		if node._members[i] != nil {
+		if node._members[i] != null {
 			ret[i] = node._members[i].copy()
 		}
 		i++
@@ -2223,7 +2282,7 @@ type ASTSwitch = struct {
 	_cases: own *[]own *ASTSwitchCase
 	_default: own *ASTDefaultCase
 }
-func new_ASTSwitch(_discriminant own *ASTExpression, _cases own *[]own *ASTSwitchCase, _default own *ASTDefaultCase) (ret: own *ASTSwitch)
+func new_ASTSwitch(_discriminant: own *ASTExpression, _cases: own *[]own *ASTSwitchCase, _default: own *ASTDefaultCase) (ret: own *ASTSwitch)
 {
 	ret = new(ASTSwitch)
 	ret._discriminant = @_discriminant
@@ -2234,17 +2293,17 @@ func new_ASTSwitch(_discriminant own *ASTExpression, _cases own *[]own *ASTSwitc
 func (node: *ASTSwitch) copy() (ret: own *ASTSwitch)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTSwitch)
 	
-	if node._discriminant != nil {
+	if node._discriminant != null {
 		ret._discriminant = node._discriminant.copy()
 	}
 	ret._cases = node.copy_cases()
-	if node._default != nil {
+	if node._default != null {
 		ret._default = node._default.copy()
 	}
 	
@@ -2257,7 +2316,7 @@ func (node: *ASTSwitch) copy_cases() (ret: own *[]own *ASTSwitchCase)
 	
 	var i = 0
 	while i < len(node._cases) {
-		if node._cases[i] != nil {
+		if node._cases[i] != null {
 			ret[i] = node._cases[i].copy()
 		}
 		i++
@@ -2272,7 +2331,7 @@ type ASTSwitchCase = struct {
 	_matches: own *[]own *ASTExpression
 	_body: own *ASTBlock
 }
-func new_ASTSwitchCase(_matches own *[]own *ASTExpression, _body own *ASTBlock) (ret: own *ASTSwitchCase)
+func new_ASTSwitchCase(_matches: own *[]own *ASTExpression, _body: own *ASTBlock) (ret: own *ASTSwitchCase)
 {
 	ret = new(ASTSwitchCase)
 	ret._matches = @_matches
@@ -2282,14 +2341,14 @@ func new_ASTSwitchCase(_matches own *[]own *ASTExpression, _body own *ASTBlock) 
 func (node: *ASTSwitchCase) copy() (ret: own *ASTSwitchCase)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTSwitchCase)
 	
 	ret._matches = node.copy_matches()
-	if node._body != nil {
+	if node._body != null {
 		ret._body = node._body.copy()
 	}
 	
@@ -2302,7 +2361,7 @@ func (node: *ASTSwitchCase) copy_matches() (ret: own *[]own *ASTExpression)
 	
 	var i = 0
 	while i < len(node._matches) {
-		if node._matches[i] != nil {
+		if node._matches[i] != null {
 			ret[i] = node._matches[i].copy()
 		}
 		i++
@@ -2316,7 +2375,7 @@ type ASTTake = struct {
 	
 	_arg: own *ASTLevel1Expression
 }
-func new_ASTTake(_arg own *ASTLevel1Expression) (ret: own *ASTTake)
+func new_ASTTake(_arg: own *ASTLevel1Expression) (ret: own *ASTTake)
 {
 	ret = new(ASTTake)
 	ret._arg = @_arg
@@ -2325,13 +2384,13 @@ func new_ASTTake(_arg own *ASTLevel1Expression) (ret: own *ASTTake)
 func (node: *ASTTake) copy() (ret: own *ASTTake)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTTake)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -2344,7 +2403,7 @@ type ASTTypeRef = struct {
 	_package: own *string
 	_name: string
 }
-func new_ASTTypeRef(_package own *string, _name string) (ret: own *ASTTypeRef)
+func new_ASTTypeRef(_package: own *string, _name: string) (ret: own *ASTTypeRef)
 {
 	ret = new(ASTTypeRef)
 	ret._package = @_package
@@ -2354,8 +2413,8 @@ func new_ASTTypeRef(_package own *string, _name string) (ret: own *ASTTypeRef)
 func (node: *ASTTypeRef) copy() (ret: own *ASTTypeRef)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTTypeRef)
@@ -2373,7 +2432,7 @@ type ASTTypeSwitch = struct {
 	_cases: own *[]own *ASTTypeSwitchCase
 	_default: own *ASTDefaultCase
 }
-func new_ASTTypeSwitch(_discriminant own *ASTExpression, _cases own *[]own *ASTTypeSwitchCase, _default own *ASTDefaultCase) (ret: own *ASTTypeSwitch)
+func new_ASTTypeSwitch(_discriminant: own *ASTExpression, _cases: own *[]own *ASTTypeSwitchCase, _default: own *ASTDefaultCase) (ret: own *ASTTypeSwitch)
 {
 	ret = new(ASTTypeSwitch)
 	ret._discriminant = @_discriminant
@@ -2384,17 +2443,17 @@ func new_ASTTypeSwitch(_discriminant own *ASTExpression, _cases own *[]own *ASTT
 func (node: *ASTTypeSwitch) copy() (ret: own *ASTTypeSwitch)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTTypeSwitch)
 	
-	if node._discriminant != nil {
+	if node._discriminant != null {
 		ret._discriminant = node._discriminant.copy()
 	}
 	ret._cases = node.copy_cases()
-	if node._default != nil {
+	if node._default != null {
 		ret._default = node._default.copy()
 	}
 	
@@ -2407,7 +2466,7 @@ func (node: *ASTTypeSwitch) copy_cases() (ret: own *[]own *ASTTypeSwitchCase)
 	
 	var i = 0
 	while i < len(node._cases) {
-		if node._cases[i] != nil {
+		if node._cases[i] != null {
 			ret[i] = node._cases[i].copy()
 		}
 		i++
@@ -2422,7 +2481,7 @@ type ASTTypeSwitchCase = struct {
 	_types: own *[]own *ASTType
 	_body: own *ASTBlock
 }
-func new_ASTTypeSwitchCase(_types own *[]own *ASTType, _body own *ASTBlock) (ret: own *ASTTypeSwitchCase)
+func new_ASTTypeSwitchCase(_types: own *[]own *ASTType, _body: own *ASTBlock) (ret: own *ASTTypeSwitchCase)
 {
 	ret = new(ASTTypeSwitchCase)
 	ret._types = @_types
@@ -2432,14 +2491,14 @@ func new_ASTTypeSwitchCase(_types own *[]own *ASTType, _body own *ASTBlock) (ret
 func (node: *ASTTypeSwitchCase) copy() (ret: own *ASTTypeSwitchCase)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTTypeSwitchCase)
 	
 	ret._types = node.copy_types()
-	if node._body != nil {
+	if node._body != null {
 		ret._body = node._body.copy()
 	}
 	
@@ -2452,7 +2511,7 @@ func (node: *ASTTypeSwitchCase) copy_types() (ret: own *[]own *ASTType)
 	
 	var i = 0
 	while i < len(node._types) {
-		if node._types[i] != nil {
+		if node._types[i] != null {
 			ret[i] = node._types[i].copy()
 		}
 		i++
@@ -2467,7 +2526,7 @@ type ASTTypedef = struct {
 	_name: string
 	_type: own *ASTNamedType
 }
-func new_ASTTypedef(_name string, _type own *ASTNamedType) (ret: own *ASTTypedef)
+func new_ASTTypedef(_name: string, _type: own *ASTNamedType) (ret: own *ASTTypedef)
 {
 	ret = new(ASTTypedef)
 	ret._name = @_name
@@ -2477,14 +2536,14 @@ func new_ASTTypedef(_name string, _type own *ASTNamedType) (ret: own *ASTTypedef
 func (node: *ASTTypedef) copy() (ret: own *ASTTypedef)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTTypedef)
 	
 	ret._name = node._name
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -2495,7 +2554,7 @@ type ASTUnaryMinus = struct {
 	
 	_arg: own *ASTLevel1Expression
 }
-func new_ASTUnaryMinus(_arg own *ASTLevel1Expression) (ret: own *ASTUnaryMinus)
+func new_ASTUnaryMinus(_arg: own *ASTLevel1Expression) (ret: own *ASTUnaryMinus)
 {
 	ret = new(ASTUnaryMinus)
 	ret._arg = @_arg
@@ -2504,13 +2563,13 @@ func new_ASTUnaryMinus(_arg own *ASTLevel1Expression) (ret: own *ASTUnaryMinus)
 func (node: *ASTUnaryMinus) copy() (ret: own *ASTUnaryMinus)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTUnaryMinus)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -2521,7 +2580,7 @@ type ASTUnaryPlus = struct {
 	
 	_arg: own *ASTLevel1Expression
 }
-func new_ASTUnaryPlus(_arg own *ASTLevel1Expression) (ret: own *ASTUnaryPlus)
+func new_ASTUnaryPlus(_arg: own *ASTLevel1Expression) (ret: own *ASTUnaryPlus)
 {
 	ret = new(ASTUnaryPlus)
 	ret._arg = @_arg
@@ -2530,13 +2589,13 @@ func new_ASTUnaryPlus(_arg own *ASTLevel1Expression) (ret: own *ASTUnaryPlus)
 func (node: *ASTUnaryPlus) copy() (ret: own *ASTUnaryPlus)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTUnaryPlus)
 	
-	if node._arg != nil {
+	if node._arg != null {
 		ret._arg = node._arg.copy()
 	}
 	
@@ -2548,7 +2607,7 @@ type ASTVardecl = struct {
 	_name: string
 	_initializer: own *ASTExpression
 }
-func new_ASTVardecl(_name string, _initializer own *ASTExpression) (ret: own *ASTVardecl)
+func new_ASTVardecl(_name: string, _initializer: own *ASTExpression) (ret: own *ASTVardecl)
 {
 	ret = new(ASTVardecl)
 	ret._name = @_name
@@ -2558,14 +2617,14 @@ func new_ASTVardecl(_name string, _initializer own *ASTExpression) (ret: own *AS
 func (node: *ASTVardecl) copy() (ret: own *ASTVardecl)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTVardecl)
 	
 	ret._name = node._name
-	if node._initializer != nil {
+	if node._initializer != null {
 		ret._initializer = node._initializer.copy()
 	}
 	
@@ -2577,7 +2636,7 @@ type ASTVardeclTyped = struct {
 	_names: own *[]string
 	_type: own *ASTType
 }
-func new_ASTVardeclTyped(_names own *[]string, _type own *ASTType) (ret: own *ASTVardeclTyped)
+func new_ASTVardeclTyped(_names: own *[]string, _type: own *ASTType) (ret: own *ASTVardeclTyped)
 {
 	ret = new(ASTVardeclTyped)
 	ret._names = @_names
@@ -2587,14 +2646,14 @@ func new_ASTVardeclTyped(_names own *[]string, _type own *ASTType) (ret: own *AS
 func (node: *ASTVardeclTyped) copy() (ret: own *ASTVardeclTyped)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTVardeclTyped)
 	
 	ret._names = node.copy_names()
-	if node._type != nil {
+	if node._type != null {
 		ret._type = node._type.copy()
 	}
 	
@@ -2605,7 +2664,11 @@ func (node: *ASTVardeclTyped) copy_names() (ret: own *[]string)
 	
 	ret = new[len(node._names)](string)
 	
-	copy(ret, node._names)
+	var i = 0
+	while i < len(ret) {
+		ret[i] = node._names[i]
+		i++
+	}
 	
 	return
 }
@@ -2617,7 +2680,7 @@ type ASTWhile = struct {
 	_contracts: own *[]own *ASTWhileContract
 	_body: own *ASTBlock
 }
-func new_ASTWhile(_label own *string, _condition own *ASTExpression, _contracts own *[]own *ASTWhileContract, _body own *ASTBlock) (ret: own *ASTWhile)
+func new_ASTWhile(_label: own *string, _condition: own *ASTExpression, _contracts: own *[]own *ASTWhileContract, _body: own *ASTBlock) (ret: own *ASTWhile)
 {
 	ret = new(ASTWhile)
 	ret._label = @_label
@@ -2629,19 +2692,19 @@ func new_ASTWhile(_label own *string, _condition own *ASTExpression, _contracts 
 func (node: *ASTWhile) copy() (ret: own *ASTWhile)
 {
 	
-	if node == nil {
-		return nil
+	if node == null {
+		return null
 	}
 	
 	ret = new(ASTWhile)
 	
 	ret._label = new(string)
 	*ret._label = *node._label
-	if node._condition != nil {
+	if node._condition != null {
 		ret._condition = node._condition.copy()
 	}
 	ret._contracts = node.copy_contracts()
-	if node._body != nil {
+	if node._body != null {
 		ret._body = node._body.copy()
 	}
 	
@@ -2654,7 +2717,7 @@ func (node: *ASTWhile) copy_contracts() (ret: own *[]own *ASTWhileContract)
 	
 	var i = 0
 	while i < len(node._contracts) {
-		if node._contracts[i] != nil {
+		if node._contracts[i] != null {
 			ret[i] = node._contracts[i].copy()
 		}
 		i++
