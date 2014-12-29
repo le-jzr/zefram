@@ -35,6 +35,15 @@ func ValueCopy(v Value) Value {
 	}
 }
 
+func ValueMethodNonNil(v Value, name string) (recv Value, m *Method) {
+	recv, m = ValueMethod(v, name)
+	if m == nil {
+		panic("Nil method: " + name)
+	}
+	return
+}
+
+
 func ValueMethod(v Value, name string) (recv Value, m *Method) {
 	_, ok := v.(AddressableValue)
 	if ok {

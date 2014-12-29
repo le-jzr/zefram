@@ -240,6 +240,10 @@ func (rctx *RunContext) RunResize(inslot1, inslot2, outslot int) {
 
 func (rctx *RunContext) RunMethod(m *Method, receiver Value, argslots []int, retvalslot int) (failcode, faildesc string) {
 
+	if m == nil {
+		panic("nil method")
+	}
+
 	switch m.builtinName {
 	case "len":
 		rctx.RunLen(argslots[0], retvalslot)
@@ -276,7 +280,7 @@ func (rctx *RunContext) RunMethod(m *Method, receiver Value, argslots []int, ret
 	}
 
 	if len(argslots) != len(m.Interface.inTypes) {
-		panic("Mismatched method call.")
+		panic("Mismatched method call of '" + m.name + "'.")
 	}
 
 	newvalstack := make([]Value, m.slots)
@@ -502,7 +506,7 @@ func (rctx *RunContext) RunInstruction(inst Instruction) (failcode, faildesc str
 			recv = rctx.GetValue(i.ReceiverSlot)
 		}
 
-		recv, m := ValueMethod(recv, i.Method)
+		recv, m := ValueMethodNonNil(recv, i.Method)
 		failcode, faildesc = rctx.RunMethod(m, recv, i.ArgSlots, i.RetvalSlot)
 	case *FuncCallInst:
 		failcode, faildesc = rctx.RunMethod(i.Func, nil, i.ArgSlots, i.RetvalSlot)
