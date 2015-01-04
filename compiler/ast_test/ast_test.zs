@@ -37,6 +37,9 @@ func main()
 	p.shift(&r, 1)
 	
 	var f = ast.parse_ASTFile(p, &r)
+	
+	var v = new(ast.NullVisitor)
+	ast.visit_file(v, f)
 	f.print()
 	env.print("\n")
 	delete @f

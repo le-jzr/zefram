@@ -5,5 +5,11 @@ type ASTBase = struct {
 	//_filepos: ?zefram.FilePos
 }
 
-type ASTVisitorBase = struct {
+type NullVisitor = struct {
+}
+
+
+// FIXME: this should be builtin
+func unused(blaaargh: int)
+{
 }
