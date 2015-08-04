@@ -36,20 +36,25 @@ func (app *Application) LoadBuiltinEnv(name string) {
 	// Accepts a filename as the only argument, and returns an
 	// array of bytes with the contents of the file. Can fail.
 	// FIXME: Document failure modes.
-	envpkg.Methods["read_file"] = NewBuiltinMethod("env.read_file", []Type{NewPointerType(NewArrayType(INT_TYPE, -1))})
+	envpkg.Methods["read"] = NewBuiltinMethod("env.read", []Type{NewPointerType(NewArrayType(INT_TYPE, -1))})
 
 	// This method just returns the array of command-line arguments
 	// for the running program.
 	envpkg.Methods["args"] = NewBuiltinMethod("env.args", []Type{NewPointerType(NewArrayType(STRING_TYPE, -1))})
 
-	/*iopkg.Globals["File"] = NewBuiltinType("io.File")
-	iopkg.Globals["Open"] = NewBuiltinMethod("io.Open")
-	iopkg.Globals["*File.Read"] = NewBuiltinMethod("io.*File.Read")
-	iopkg.Globals["*File.Write"] = NewBuiltinMethod("io.*File.Write")
-	iopkg.Globals["Dir"] = NewBuiltinType("io.Dir")
-	iopkg.Glabals["OpenDir"] = NewBuiltinMethod("io.OpenDir")
-	iopkg.Globals["*Dir.Read"] = NewBuiltinMethod("io.*Dir.Read")
-	*/
+	// Returns contents of an environment variable.
+	envpkg.Methods["get_env"] = NewBuiltinMethod("env.get_env", []Type{STRING_TYPE})
+	
+	// Creates a directory.
+	envpkg.Methods["mkdir"] = NewBuiltinMethod("env.mkdir", nil)
+	
+	envpkg.Methods["write"] = NewBuiltinMethod("env.write", nil)
+	
+	envpkg.Methods["remove"] = NewBuiltinMethod("env.remove", nil)
+	
+	envpkg.Methods["read_dir"] = NewBuiltinMethod("env.read_dir, []Type{NewPointerType(NewArrayType(STRING_TYPE, -1))})
+	
+	envpkg.Methods["is_dir"] = NewBuiltinMethod("env.is_dir", []Type{BOOL_TYPE})
 }
 
 func (app *Application) LoadPackage(name string, path string) {

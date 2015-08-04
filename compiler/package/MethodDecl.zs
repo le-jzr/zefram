@@ -15,7 +15,7 @@ func write_method_decl(out: *Writer, decl: *MethodDecl) {
 	spl.start_list(out)
 	var i = 0
 	while i < len(decl.in_params) {
-		write_var_decl(out, decl.in_params[i])		
+		write_var_decl(out, decl.in_params[i])
 		i++
 	}
 	spl.end_list(out)
